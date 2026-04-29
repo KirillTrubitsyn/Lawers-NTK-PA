@@ -1084,18 +1084,239 @@
   </div>
 
   <div class="tabs" role="tablist">
-    <button class="tab active" data-tab="list" role="tab">
-      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-      <span class="tab-text">Список</span>
-    </button>
-    <button class="tab" data-tab="chart" role="tab">
+    <button class="tab active" data-tab="chart" role="tab">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       <span class="tab-text">Структура</span>
+    </button>
+    <button class="tab" data-tab="list" role="tab">
+      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <span class="tab-text">Список</span>
     </button>
   </div>
 
   <!-- ============ ВКЛАДКА: СПИСОК ============ -->
-  <div class="tab-panel active" id="panel-list">
+  <div class="tab-panel active" id="panel-chart">
+    <div class="org-chart">
+      <div class="org-tree">
+
+        <!-- Корень -->
+        <div class="org-root">
+          <button class="org-block root" data-division-id="div-direction">
+            <div class="org-block-label">I · Дирекция</div>
+            <div class="org-block-name">Дирекция по юридическим вопросам</div>
+            <div class="org-block-meta">
+              <span>Директор: <b>Трубицын К.А.</b></span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Уровень управлений ЮД ПА -->
+        <div class="org-level">
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-court">
+              <div class="org-block-label">II · Управление</div>
+              <div class="org-block-name">Судебное управление</div>
+              <div class="org-block-meta">
+                <span><b>5</b> сотр.</span>
+                <span><b>1</b> вак.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-contract">
+              <div class="org-block-label">III · Управление</div>
+              <div class="org-block-name">Договорное управление</div>
+              <div class="org-block-meta">
+                <span><b>5</b> сотр.</span>
+                <span>+ отдел</span>
+              </div>
+            </button>
+            <div class="org-sub">
+              <button class="org-block sub" data-division-id="div-projects">
+                <div class="org-block-label">— Отдел</div>
+                <div class="org-block-name">Крупных проектов</div>
+                <div class="org-block-meta">
+                  <span><b>2</b> сотр.</span>
+                  <span><b>1</b> вак.</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-corp">
+              <div class="org-block-label">IV · Управление</div>
+              <div class="org-block-name">Корпоративное управление</div>
+              <div class="org-block-meta">
+                <span><b>5</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-fas">
+              <div class="org-block-label">V · Управление</div>
+              <div class="org-block-name">Антимонопольное управление</div>
+              <div class="org-block-meta">
+                <span><b>2</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-regulatory">
+              <div class="org-block-label">Отдел</div>
+              <div class="org-block-name">Регуляторных рисков</div>
+              <div class="org-block-meta">
+                <span><b>1</b> сотр.</span>
+              </div>
+            </button>
+            <div class="org-sub">
+              <button class="org-block sub" data-division-id="div-projects-lead">
+                <div class="org-block-label">Направление</div>
+                <div class="org-block-name">ЕХСЗ-2 (стройка)</div>
+                <div class="org-block-meta">
+                  <span><b>1</b> сотр.</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Юрлица холдинга -->
+        <div class="org-section-label teal">Юрлица холдинга</div>
+        <div class="org-companies-grid">
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-vrz">
+              <div class="org-block-label">ВРЗ</div>
+              <div class="org-block-name">ООО «ВРЗ «Депо НТК»</div>
+              <div class="org-block-meta">
+                <span><b>2</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-dtu">
+              <div class="org-block-label">ДТУ</div>
+              <div class="org-block-name">АО «ДТУ»</div>
+              <div class="org-block-meta">
+                <span><b>4</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-tbt">
+              <div class="org-block-label">ТБТ</div>
+              <div class="org-block-name">ООО «ТБТ»</div>
+              <div class="org-block-meta">
+                <span><b>3</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-etu">
+              <div class="org-block-label">ЕТУ</div>
+              <div class="org-block-name">ООО «ЕТУ»</div>
+              <div class="org-block-meta">
+                <span><b>7</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-skmp">
+              <div class="org-block-label">СК МП</div>
+              <div class="org-block-name">ООО «СК «Малый порт»</div>
+              <div class="org-block-meta">
+                <span><b>3</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-masko">
+              <div class="org-block-label">МАСКО</div>
+              <div class="org-block-name">АО «МАСКО»</div>
+              <div class="org-block-meta">
+                <span><b>2</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-mmtp">
+              <div class="org-block-label">ММТП</div>
+              <div class="org-block-name">АО «ММТП»</div>
+              <div class="org-block-meta">
+                <span><b>3</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-mbt">
+              <div class="org-block-label">МБТ</div>
+              <div class="org-block-name">ООО «МБТ»</div>
+              <div class="org-block-meta">
+                <span><b>2</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-ntk-rail">
+              <div class="org-block-label">НТКрэйл / КФС / НацЛогистик</div>
+              <div class="org-block-name">ООО «НТКрэйл», АО «КФС-Транс», ООО «НацЛогистик»</div>
+              <div class="org-block-meta">
+                <span><b>1</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-ehsz2">
+              <div class="org-block-label">ЕХСЗ-2</div>
+              <div class="org-block-name">ООО «ЕХСЗ-2» (ЕвроХим Северо-Запад-2, Кингисепп)</div>
+              <div class="org-block-meta">
+                <span><b>6</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-nts">
+              <div class="org-block-label">НТС</div>
+              <div class="org-block-name">АО «НефтеТрансСервис» (НТС)</div>
+              <div class="org-block-meta">
+                <span><b>15</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-asia">
+              <div class="org-block-label">АНТ</div>
+              <div class="org-block-name">ТОО «АзияНефтеТранс»</div>
+              <div class="org-block-meta">
+                <span><b>1</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /panel-chart -->
+
+  <!-- ============ ВКЛАДКА: ОРГАНОГРАММА ============ -->
+  <div class="tab-panel" id="panel-list">
 
   <div class="toolbar">
     <div class="search">
@@ -2633,227 +2854,6 @@
   </main>
 
   </div><!-- /panel-list -->
-
-  <!-- ============ ВКЛАДКА: ОРГАНОГРАММА ============ -->
-  <div class="tab-panel" id="panel-chart">
-    <div class="org-chart">
-      <div class="org-tree">
-
-        <!-- Корень -->
-        <div class="org-root">
-          <button class="org-block root" data-division-id="div-direction">
-            <div class="org-block-label">I · Дирекция</div>
-            <div class="org-block-name">Дирекция по юридическим вопросам</div>
-            <div class="org-block-meta">
-              <span>Директор: <b>Трубицын К.А.</b></span>
-            </div>
-          </button>
-        </div>
-
-        <!-- Уровень управлений ЮД ПА -->
-        <div class="org-level">
-
-          <div class="org-branch">
-            <button class="org-block" data-division-id="div-court">
-              <div class="org-block-label">II · Управление</div>
-              <div class="org-block-name">Судебное управление</div>
-              <div class="org-block-meta">
-                <span><b>5</b> сотр.</span>
-                <span><b>1</b> вак.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch">
-            <button class="org-block" data-division-id="div-contract">
-              <div class="org-block-label">III · Управление</div>
-              <div class="org-block-name">Договорное управление</div>
-              <div class="org-block-meta">
-                <span><b>5</b> сотр.</span>
-                <span>+ отдел</span>
-              </div>
-            </button>
-            <div class="org-sub">
-              <button class="org-block sub" data-division-id="div-projects">
-                <div class="org-block-label">— Отдел</div>
-                <div class="org-block-name">Крупных проектов</div>
-                <div class="org-block-meta">
-                  <span><b>2</b> сотр.</span>
-                  <span><b>1</b> вак.</span>
-                </div>
-              </button>
-            </div>
-          </div>
-
-          <div class="org-branch">
-            <button class="org-block" data-division-id="div-corp">
-              <div class="org-block-label">IV · Управление</div>
-              <div class="org-block-name">Корпоративное управление</div>
-              <div class="org-block-meta">
-                <span><b>5</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch">
-            <button class="org-block" data-division-id="div-fas">
-              <div class="org-block-label">V · Управление</div>
-              <div class="org-block-name">Антимонопольное управление</div>
-              <div class="org-block-meta">
-                <span><b>2</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch">
-            <button class="org-block" data-division-id="div-regulatory">
-              <div class="org-block-label">Отдел</div>
-              <div class="org-block-name">Регуляторных рисков</div>
-              <div class="org-block-meta">
-                <span><b>1</b> сотр.</span>
-              </div>
-            </button>
-            <div class="org-sub">
-              <button class="org-block sub" data-division-id="div-projects-lead">
-                <div class="org-block-label">Направление</div>
-                <div class="org-block-name">ЕХСЗ-2 (стройка)</div>
-                <div class="org-block-meta">
-                  <span><b>1</b> сотр.</span>
-                </div>
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Юрлица холдинга -->
-        <div class="org-section-label teal">Юрлица холдинга</div>
-        <div class="org-companies-grid">
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-vrz">
-              <div class="org-block-label">ВРЗ</div>
-              <div class="org-block-name">ООО «ВРЗ «Депо НТК»</div>
-              <div class="org-block-meta">
-                <span><b>2</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-dtu">
-              <div class="org-block-label">ДТУ</div>
-              <div class="org-block-name">АО «ДТУ»</div>
-              <div class="org-block-meta">
-                <span><b>4</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-tbt">
-              <div class="org-block-label">ТБТ</div>
-              <div class="org-block-name">ООО «ТБТ»</div>
-              <div class="org-block-meta">
-                <span><b>3</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-etu">
-              <div class="org-block-label">ЕТУ</div>
-              <div class="org-block-name">ООО «ЕТУ»</div>
-              <div class="org-block-meta">
-                <span><b>7</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-skmp">
-              <div class="org-block-label">СК МП</div>
-              <div class="org-block-name">ООО «СК «Малый порт»</div>
-              <div class="org-block-meta">
-                <span><b>3</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-masko">
-              <div class="org-block-label">МАСКО</div>
-              <div class="org-block-name">АО «МАСКО»</div>
-              <div class="org-block-meta">
-                <span><b>2</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-mmtp">
-              <div class="org-block-label">ММТП</div>
-              <div class="org-block-name">АО «ММТП»</div>
-              <div class="org-block-meta">
-                <span><b>3</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-mbt">
-              <div class="org-block-label">МБТ</div>
-              <div class="org-block-name">ООО «МБТ»</div>
-              <div class="org-block-meta">
-                <span><b>2</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-ntk-rail">
-              <div class="org-block-label">НТКрэйл / КФС / НацЛогистик</div>
-              <div class="org-block-name">ООО «НТКрэйл», АО «КФС-Транс», ООО «НацЛогистик»</div>
-              <div class="org-block-meta">
-                <span><b>1</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-ehsz2">
-              <div class="org-block-label">ЕХСЗ-2</div>
-              <div class="org-block-name">ООО «ЕХСЗ-2» (ЕвроХим Северо-Запад-2, Кингисепп)</div>
-              <div class="org-block-meta">
-                <span><b>6</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-nts">
-              <div class="org-block-label">НТС</div>
-              <div class="org-block-name">АО «НефтеТрансСервис» (НТС)</div>
-              <div class="org-block-meta">
-                <span><b>15</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="org-branch sub-branch">
-            <button class="org-block sub-co" data-division-id="sub-asia">
-              <div class="org-block-label">АНТ</div>
-              <div class="org-block-name">ТОО «АзияНефтеТранс»</div>
-              <div class="org-block-meta">
-                <span><b>1</b> сотр.</span>
-              </div>
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div><!-- /panel-chart -->
 
   <!-- ============ МОДАЛЬНОЕ ОКНО ============ -->
   <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
