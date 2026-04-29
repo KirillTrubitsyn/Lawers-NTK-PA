@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'lawers-ntk-pa-v2';
+const CACHE_VERSION = 'lawers-ntk-pa-v3';
 const PRECACHE = [
   './',
   './index.html',
