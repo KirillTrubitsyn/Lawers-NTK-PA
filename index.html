@@ -1,0 +1,3081 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юридическая служба · Холдинг Портовый Альянс / НТК</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ec;
+    --bg-paper: #faf7f1;
+    --ink: #1a1d24;
+    --ink-soft: #3a3f4b;
+    --ink-mute: #6b6f7a;
+    --line: #d8d2c4;
+    --line-soft: #e6e1d4;
+    --accent: #6e1f1f;
+    --accent-soft: #8a3535;
+    --gold: #a8895e;
+    --vacancy: #b8704a;
+    --teal: #2d5a5e;
+    --shadow: 0 1px 0 rgba(26,29,36,.04), 0 12px 40px -20px rgba(26,29,36,.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(110,31,31,.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 100%, rgba(168,137,94,.05) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 56px 48px 96px;
+  }
+
+  /* === ШАПКА === */
+  header.top {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 36px;
+    margin-bottom: 44px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    max-width: 80px;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 54px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  h1 em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-feature-settings: 'tnum';
+    line-height: 1.7;
+  }
+  .meta strong {
+    display: block;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  /* === СВОДКА === */
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-bottom: 48px;
+    border: 1px solid var(--line);
+    background: var(--bg-paper);
+    border-radius: 2px;
+  }
+  .summary > div {
+    padding: 22px 24px;
+    border-right: 1px solid var(--line-soft);
+  }
+  .summary > div:last-child { border-right: none; }
+  .summary .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 6px;
+    font-feature-settings: 'lnum';
+  }
+  .summary .num.warn { color: var(--vacancy); }
+  .summary .num.teal { color: var(--teal); }
+  .summary .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+
+  /* === ВКЛАДКИ === */
+  .tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 36px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tab {
+    padding: 14px 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink-mute);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color .15s ease, border-color .15s ease;
+    margin-bottom: -1px;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* === РАЗДЕЛИТЕЛЬ === */
+  .section-title {
+    margin: 56px 0 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .section-title:first-of-type { margin-top: 0; }
+  .section-title h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .section-title h2 em { color: var(--accent); font-style: italic; }
+  .section-title .hint {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+
+  /* === ПОИСК === */
+  .toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search {
+    flex: 1;
+    min-width: 280px;
+    position: relative;
+  }
+  .search input {
+    width: 100%;
+    padding: 13px 18px 13px 44px;
+    font-family: inherit;
+    font-size: 14px;
+    border: 1px solid var(--line);
+    background: var(--bg-paper);
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .search input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(110,31,31,.08);
+  }
+  .search::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b6f7a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>");
+    pointer-events: none;
+  }
+  .filter-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink-soft);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .12s ease;
+    white-space: nowrap;
+  }
+  .chip:hover { border-color: var(--ink-mute); color: var(--ink); }
+  .chip.active {
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-color: var(--ink);
+  }
+
+  /* === УПРАВЛЕНИЯ === */
+  .division {
+    margin-bottom: 28px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .division.subsidiary { border-left: 3px solid var(--teal); }
+
+  .division-head {
+    padding: 24px 36px 20px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--bg-paper) 0%, rgba(245,242,236,.6) 100%);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+  }
+  .division-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-feature-settings: 'lnum';
+  }
+  .subsidiary .division-num { color: var(--teal); }
+  .division-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 800px;
+  }
+  .sub-note {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 800px;
+  }
+  .division-stats {
+    text-align: right;
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    line-height: 1.8;
+    white-space: nowrap;
+  }
+  .division-stats span { color: var(--ink); font-weight: 600; }
+
+  /* === КАРТОЧКИ СОТРУДНИКОВ === */
+  .roster { display: grid; grid-template-columns: 1fr; }
+  .person {
+    display: grid;
+    grid-template-columns: 280px 1fr 220px;
+    gap: 28px;
+    padding: 18px 36px;
+    border-bottom: 1px solid var(--line-soft);
+    transition: background .12s ease;
+    align-items: start;
+  }
+  .person:last-child { border-bottom: none; }
+  .person:hover { background: rgba(168,137,94,.04); }
+
+  .person-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+  }
+  .person-name.vacancy { color: var(--vacancy); font-style: italic; }
+
+  .role-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-radius: 1px;
+  }
+  .role-tag.lead { background: var(--accent); }
+  .role-tag.deputy { background: var(--gold); }
+  .role-tag.maternity {
+    background: transparent;
+    color: var(--ink-mute);
+    border: 1px solid var(--line);
+  }
+
+  .person-role {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    padding-top: 2px;
+  }
+  .person-role .role-title {
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .person-role .role-desc {
+    color: var(--ink-mute);
+    font-size: 12.5px;
+    line-height: 1.5;
+    display: block;
+  }
+  .person-role .role-note {
+    display: block;
+    margin-top: 4px;
+    font-size: 11.5px;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .person-phone {
+    text-align: right;
+    padding-top: 4px;
+  }
+  .person-phone .ext {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-bottom: 3px;
+    font-feature-settings: 'tnum';
+    letter-spacing: 0.02em;
+  }
+  .person-phone .mob {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink);
+    font-feature-settings: 'tnum';
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  .person-phone .mob a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--line);
+    transition: border-color .12s ease, color .12s ease;
+  }
+  .person-phone .mob a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .person-phone .empty {
+    color: var(--ink-mute);
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+
+  /* === ПУСТОЕ СОСТОЯНИЕ === */
+  .empty-state {
+    display: none;
+    padding: 60px 32px;
+    text-align: center;
+    color: var(--ink-mute);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    background: var(--bg-paper);
+    border: 1px dashed var(--line);
+    border-radius: 2px;
+  }
+
+  /* === ОРГАНОГРАММА === */
+  .org-chart {
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 56px 32px;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+  }
+  .org-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 1100px;
+    position: relative;
+  }
+  .org-root { margin-bottom: 48px; position: relative; }
+  .org-root::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -48px;
+    width: 1px;
+    height: 24px;
+    background: var(--line);
+  }
+  .org-level {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    width: 100%;
+    position: relative;
+    padding-top: 24px;
+    flex-wrap: nowrap;
+  }
+  .org-level::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    background: var(--line);
+  }
+  .org-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 175px;
+    max-width: 220px;
+    position: relative;
+  }
+  .org-branch::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    width: 1px;
+    height: 24px;
+    background: var(--line);
+  }
+
+  .org-section-label {
+    width: 100%;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 56px 0 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .org-section-label.teal { color: var(--teal); }
+
+  .org-block {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all .18s ease;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    color: var(--ink);
+    position: relative;
+    box-shadow: 0 1px 0 rgba(26,29,36,.03);
+  }
+  .org-block:hover {
+    border-color: var(--accent);
+    background: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -12px rgba(110,31,31,.25);
+  }
+  .org-block.root {
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-color: var(--ink);
+    padding: 22px 36px;
+    min-width: 360px;
+    text-align: center;
+  }
+  .org-block.root:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .org-block.sub-co { border-left: 3px solid var(--teal); }
+  .org-block.sub-co:hover { border-color: var(--teal); border-left-color: var(--teal); box-shadow: 0 8px 24px -12px rgba(45,90,94,.3); }
+
+  .org-block-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .org-block.sub-co .org-block-label { color: var(--teal); }
+  .org-block.root .org-block-label { color: var(--gold); }
+  .org-block-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    margin-bottom: 8px;
+  }
+  .org-block.root .org-block-name {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  .org-block-meta {
+    font-size: 11px;
+    color: var(--ink-mute);
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 8px;
+    margin-top: 4px;
+    font-feature-settings: 'tnum';
+  }
+  .org-block.root .org-block-meta {
+    color: rgba(250,247,241,.7);
+    border-top-color: rgba(250,247,241,.15);
+    justify-content: center;
+    gap: 18px;
+  }
+  .org-block-meta b { color: var(--ink); font-weight: 600; }
+  .org-block.root .org-block-meta b { color: var(--bg-paper); }
+
+  .org-sub {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+    width: 100%;
+    position: relative;
+  }
+  .org-sub::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 1px;
+    height: 10px;
+    background: var(--line);
+  }
+  .org-block.sub { background: rgba(168,137,94,.06); border-style: dashed; }
+
+  /* Сетка региональных компаний */
+  .org-companies-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .org-companies-grid .org-block {
+    min-height: 100%;
+  }
+
+  /* === МОДАЛЬНОЕ ОКНО === */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,29,36,.55);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 24px;
+    overflow-y: auto;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    max-width: 820px;
+    width: 100%;
+    box-shadow: 0 24px 80px -20px rgba(0,0,0,.4);
+    animation: modalIn .25s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .modal-head {
+    padding: 28px 36px 24px;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: start;
+  }
+  .modal-head .division-num { margin-bottom: 8px; }
+  .modal-head .division-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .modal-close {
+    background: transparent;
+    border: 1px solid var(--line);
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
+    cursor: pointer;
+    color: var(--ink-mute);
+    transition: all .15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    line-height: 1;
+  }
+  .modal-close:hover {
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-color: var(--ink);
+  }
+  .modal-body { max-height: 70vh; overflow-y: auto; }
+  .modal-body .person {
+    padding: 18px 36px;
+    grid-template-columns: 220px 1fr 180px;
+    gap: 20px;
+  }
+  .modal-body .person:hover { background: rgba(168,137,94,.05); }
+
+  /* === ПОДВАЛ === */
+  footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  footer .legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  footer .legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  footer .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* === ПОДЗАГОЛОВОК ОТДЕЛА ВНУТРИ ЮРЛИЦА === */
+  .subdept-head {
+    padding: 14px 36px 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-top: 1px solid var(--line-soft);
+    background: rgba(45,90,94,.03);
+  }
+  .subdept-head:first-child { border-top: none; }
+
+  /* === КНОПКА ФОТ В ШАПКЕ === */
+  .meta-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+  }
+  .btn-fot {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .btn-fot:hover {
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-color: var(--ink);
+  }
+  .btn-fot.unlocked {
+    background: var(--teal);
+    color: var(--bg-paper);
+    border-color: var(--teal);
+  }
+  .btn-fot.unlocked:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-fot svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+  }
+
+  /* === МОДАЛКА ФОТ === */
+  .modal-fot { max-width: 520px; }
+  .fot-modal-body {
+    padding: 24px 36px 28px;
+  }
+  .fot-modal-text {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .fot-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .fot-input-row input {
+    flex: 1;
+    padding: 11px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    border: 1px solid var(--line);
+    background: var(--bg-paper);
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+    letter-spacing: 0.08em;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .fot-input-row input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(110,31,31,.08);
+  }
+  .btn-primary {
+    padding: 11px 22px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .btn-primary:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .btn-secondary {
+    padding: 9px 16px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink-soft);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-color: var(--ink);
+  }
+  .fot-error {
+    margin-top: 10px;
+    min-height: 18px;
+    font-size: 12px;
+    color: var(--vacancy);
+    font-weight: 500;
+  }
+  .fot-unlocked-state {
+    display: none;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(45,90,94,.06);
+    border-left: 3px solid var(--teal);
+    border-radius: 2px;
+  }
+  .fot-unlocked-state.shown { display: flex; }
+  .fot-unlocked-state .fot-unlocked-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: var(--bg-paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .fot-unlocked-state svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+  }
+  .fot-unlocked-state strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .fot-unlocked-state span {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-mute);
+    line-height: 1.4;
+  }
+  .fot-unlocked-state > div:nth-child(2) { flex: 1; }
+  body.payroll-unlocked .fot-input-row,
+  body.payroll-unlocked .fot-modal-text,
+  body.payroll-unlocked .fot-error { display: none; }
+  body.payroll-unlocked .fot-unlocked-state { display: flex; }
+
+  /* === БЛОК ЗАРПЛАТ В КАРТОЧКЕ === */
+  .payroll-locked {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(45,90,94,.05);
+    border-left: 2px solid var(--teal);
+    border-radius: 2px;
+    display: none;
+  }
+  body.payroll-unlocked .payroll-locked { display: block; }
+  .payroll-list {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-feature-settings: 'tnum';
+  }
+  .payroll-list .pay-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .payroll-list .pay-item + .pay-item {
+    padding-left: 16px;
+    border-left: 1px solid rgba(45,90,94,.2);
+  }
+  .payroll-list .pay-key {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  .payroll-list .pay-val {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 12.5px;
+  }
+  .payroll-list .pay-val.muted {
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  .payroll-list .pay-fot {
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* === АДАПТИВНОСТЬ === */
+  @media (max-width: 1100px) {
+    .org-companies-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .wrap { padding: 32px 20px 64px; }
+    header.top { grid-template-columns: 1fr; }
+    .meta { text-align: left; }
+    .summary { grid-template-columns: repeat(2, 1fr); }
+    .summary > div:nth-child(2) { border-right: none; }
+    .summary > div:nth-child(1), .summary > div:nth-child(2) { border-bottom: 1px solid var(--line-soft); }
+    .division-head { grid-template-columns: 1fr; padding: 24px; }
+    .division-stats { text-align: left; }
+    .person {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 20px 24px;
+    }
+    .person-phone { text-align: left; }
+    footer { grid-template-columns: 1fr; }
+    .tab { padding: 12px 16px; font-size: 16px; }
+    .tab span.tab-text { display: none; }
+    .tab svg { width: 18px; height: 18px; }
+    .tab.active span.tab-text { display: inline; }
+    .org-chart { padding: 32px 8px; }
+    .org-companies-grid { grid-template-columns: repeat(2, 1fr); }
+    .modal { margin: 0; }
+    .modal-head { padding: 20px 24px; }
+    .modal-body .person {
+      grid-template-columns: 1fr;
+      padding: 16px 24px;
+    }
+    .section-title { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+
+  @media print {
+    body { background: white; }
+    .toolbar, .tabs { display: none; }
+    .tab-panel { display: block !important; }
+    .division { box-shadow: none; break-inside: avoid; }
+    .person:hover { background: transparent; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <div class="eyebrow">Холдинг Портовый Альянс · НТК</div>
+      <h1>Юридическая <em>служба</em><br>структура и контакты</h1>
+    </div>
+    <div class="meta">
+      <div class="meta-actions">
+        <button class="btn-fot" id="btnFot" type="button" aria-label="Открыть финансовые данные">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>ФОТ</span>
+        </button>
+      </div>
+      <strong>Внутренний документ</strong>
+      По состоянию на 24.04.2026<br>
+      Источник: справочник ЮД ПА/НТК
+    </div>
+  </header>
+
+  <section class="summary">
+    <div><div class="num">64</div><div class="lbl">Всего сотрудников</div></div>
+    <div><div class="num">5</div><div class="lbl">Подразделений ЮД ПА</div></div>
+    <div><div class="num teal">12</div><div class="lbl">Юрлиц холдинга</div></div>
+    <div><div class="num warn">10</div><div class="lbl">Вакансий</div></div>
+  </section>
+
+  <!-- Модальное окно для ввода кода доступа к ФОТ -->
+  <div class="modal-backdrop" id="fotModal" role="dialog" aria-modal="true">
+    <div class="modal modal-fot">
+      <div class="modal-head">
+        <div>
+          <div class="division-num" id="fotModalNum">Защищённые данные</div>
+          <div class="division-name" id="fotModalTitle">Финансовые показатели</div>
+        </div>
+        <button class="modal-close" id="fotModalClose" aria-label="Закрыть">×</button>
+      </div>
+      <div class="modal-body fot-modal-body">
+        <p class="fot-modal-text">
+          Доступ к окладам, ФОТ, премиям и годовым бонусам предоставляется по коду.
+          Для отключения доступа закройте вкладку или нажмите «Скрыть».
+        </p>
+        <div class="fot-input-row">
+          <input type="password" id="pbInput" placeholder="код доступа" autocomplete="off" maxlength="32" aria-label="Код доступа">
+          <button class="btn-primary" id="pbButton" type="button">Открыть</button>
+        </div>
+        <div class="fot-error" id="pbError"></div>
+        <div class="fot-unlocked-state" id="pbUnlockedState">
+          <div class="fot-unlocked-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+          </div>
+          <div>
+            <strong>Финансовые данные открыты</strong>
+            <span>Оклады, ФОТ и бонусы видны на карточках сотрудников.</span>
+          </div>
+          <button class="btn-secondary" id="pbLockButton" type="button">Скрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-tab="list" role="tab">
+      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <span class="tab-text">Список</span>
+    </button>
+    <button class="tab" data-tab="chart" role="tab">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <span class="tab-text">Структура</span>
+    </button>
+  </div>
+
+  <!-- ============ ВКЛАДКА: СПИСОК ============ -->
+  <div class="tab-panel active" id="panel-list">
+
+  <div class="toolbar">
+    <div class="search">
+      <input type="search" id="searchInput" placeholder="Поиск по ФИО, должности, функционалу или телефону…" autocomplete="off">
+    </div>
+    <div class="filter-chips" id="filterChips">
+      <button class="chip active" data-filter="all">Все</button>
+      <button class="chip" data-filter="hq">Москва · ЮД ПА</button>
+      <button class="chip" data-filter="sub">Юрлица холдинга</button>
+      <button class="chip" data-filter="leads">Руководители</button>
+      <button class="chip" data-filter="vacancy">Вакансии</button>
+    </div>
+  </div>
+
+  <main id="content">
+
+    <div class="section-title" data-section="hq">
+      <h2>Юридическая дирекция АО <em>«Портовый Альянс»</em></h2>
+      <span class="hint">Москва · центральный офис</span>
+    </div>
+
+
+    <section class="division" id="div-direction" data-division="Дирекция по юридическим вопросам">
+      <div class="division-head">
+        <div>
+          <div class="division-num">I · Дирекция</div>
+          <div class="division-name">Дирекция по юридическим вопросам</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>1</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Трубицын Кирилл Андреевич</div>
+            <span class="role-tag lead">Директор</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Директор</span>
+            <span class="role-desc">Общее руководство дирекцией.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79651123813">+7&nbsp;965&nbsp;112&nbsp;38&nbsp;13</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">2 000 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">1 000 000 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="division" id="div-projects-lead" data-division="По вопросам ООО «ЕХСЗ-2» (стройка)">
+      <div class="division-head">
+        <div>
+          <div class="division-num">Руководитель направления</div>
+          <div class="division-name">По вопросам ООО «ЕХСЗ-2» (стройка)</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>1</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Краснокутский Алексей Сергеевич</div>
+            <span class="role-tag lead">Руководитель направления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Руководитель направления</span>
+            <span class="role-desc">Юридическое сопровождение деятельности ЕХСЗ-2 в части строительства завода по производству аммиака и карбамида; судебно-претензионная работа с подрядчиками; работа с генподрядчиком ООО «Велесстрой»; крупные проекты ЕТУ.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332799</div>
+        <div class="mob"><a href="tel:+79250811110">+7&nbsp;925&nbsp;081&nbsp;11&nbsp;10</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">402 500 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">402 500 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="division" id="div-regulatory" data-division="Регуляторных рисков">
+      <div class="division-head">
+        <div>
+          <div class="division-num">Отдел</div>
+          <div class="division-name">Регуляторных рисков</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>1</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Стуканова Лилия Сергеевна</div>
+            <span class="role-tag lead">Руководитель направления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Руководитель направления</span>
+            <span class="role-desc">Регуляторные риски.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332550</div>
+        <div class="mob"><a href="tel:+79853848490">+7&nbsp;985&nbsp;384&nbsp;84&nbsp;90</a></div>
+        <div class="mob"><a href="tel:+79266750362">+7&nbsp;926&nbsp;675&nbsp;03&nbsp;62</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">472 500 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">472 500 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="division" id="div-court" data-division="Управление нормативно-аналитической, общеправовой и судебной работы">
+      <div class="division-head">
+        <div>
+          <div class="division-num">II · Управление</div>
+          <div class="division-name">Управление нормативно-аналитической, общеправовой и судебной работы</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>6</span><br>Вакансий: <span>1</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Кандаков Константин Андреевич</div>
+            <span class="role-tag lead">Начальник управления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник управления</span>
+            <span class="role-desc">Все вопросы управления.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79266742769">+7&nbsp;926&nbsp;674&nbsp;27&nbsp;69</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">443 000 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">30%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">575 900 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="deputy maternity">
+          <div>
+            <div class="person-name">Марахова Яна Ивановна</div>
+            <span class="role-tag maternity">в декрете</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Руководитель направления</span>
+            <span class="role-desc">Судебно-исковая работа; замещение начальника в период отпуска.</span>
+            <span class="role-note">Декретное место. ФИО: Марахова Яна Ивановна.</span>
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332959</div>
+        <div class="mob"><a href="tel:+79066756261">+7&nbsp;906&nbsp;675&nbsp;62&nbsp;61</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">231 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">231 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Петрова Эльвира Иннокентьевна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            <span class="role-desc">Судебно-исковая работа.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332343</div>
+        <div class="mob"><a href="tel:+79141106039">+7&nbsp;914&nbsp;110&nbsp;60&nbsp;39</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">189 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">189 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Дарцмелия Ксения Зурабовна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            <span class="role-desc">Судебно-исковая работа.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332998</div>
+        <div class="mob"><a href="tel:+79689971071">+7&nbsp;968&nbsp;997&nbsp;10&nbsp;71</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">189 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">189 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Черных Полина Алексеевна</div>
+            <span class="role-tag">Ведущий юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Ведущий юрисконсульт</span>
+            <span class="role-desc">Судебно-исковая работа.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332150</div>
+        <div class="mob"><a href="tel:+79605975344">+7&nbsp;960&nbsp;597&nbsp;53&nbsp;44</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">168 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">168 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Рвачева Анастасия Андреевна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            <span class="role-desc">Судебно-исковая работа.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 32982</div>
+        <div class="mob"><a href="tel:+79771383750">+7&nbsp;977&nbsp;138&nbsp;37&nbsp;50</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">150 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">150 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            <span class="role-desc">Судебно-исковая работа.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">294 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">294 000 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="division" id="div-contract" data-division="Управление правового сопровождения финансово-хозяйственной деятельности и договорной работы">
+      <div class="division-head">
+        <div>
+          <div class="division-num">III · Управление</div>
+          <div class="division-name">Управление правового сопровождения финансово-хозяйственной деятельности и договорной работы</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>6</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Луничкина Анна Сергеевна</div>
+            <span class="role-tag lead">Начальник управления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник управления</span>
+            <span class="role-desc">Все вопросы управления; согласование ЛНА.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 303402</div>
+        <div class="mob"><a href="tel:+79160808137">+7&nbsp;916&nbsp;080&nbsp;81&nbsp;37</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">315 000 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">30%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">409 500 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="deputy">
+          <div>
+            <div class="person-name">Блинов Глеб Сергеевич</div>
+            <span class="role-tag deputy">Руководитель направления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Руководитель направления</span>
+            <span class="role-desc">Задачи Краснокутского А.С. в части подготовки досудебных претензий и юридических заключений; согласование договоров. Должен замещать начальника. Работает с 15.04.2026.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79891070204">+7&nbsp;989&nbsp;107&nbsp;02&nbsp;04</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">240 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">240 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Голбан Альсина Васильевна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            <span class="role-desc">Согласование доверенностей и договоров.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332440</div>
+        <div class="mob"><a href="tel:+79891531618">+7&nbsp;989&nbsp;153&nbsp;16&nbsp;18</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">194 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">194 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Михневич Наталья Павловна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            <span class="role-desc">Согласование договоров и заключений по протоколам разногласий контрагентов; общеправовые заключения.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 32119</div>
+        <div class="mob"><a href="tel:+79035038571">+7&nbsp;903&nbsp;503&nbsp;85&nbsp;71</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">189 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">189 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Рожкова Екатерина Александровна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            <span class="role-desc">Согласование договоров и доверенностей в период отсутствия главного юрисконсульта; общеправовые заключения.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332755</div>
+        <div class="mob"><a href="tel:+79771889778">+7&nbsp;977&nbsp;188&nbsp;97&nbsp;78</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">175 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">175 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Соболева Александра Стефания Антоновна</div>
+            <span class="role-tag">Специалист</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Специалист</span>
+            <span class="role-desc">Распечатка договоров, платежи ЮС, АХД; обеспечение работы директора ЮС.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 32600</div>
+        <div class="mob"><a href="tel:+79264906618">+7&nbsp;926&nbsp;490&nbsp;66&nbsp;18</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">131 250 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">131 250 ₽</span></span></div></div>
+        </div>
+      </div>
+    
+      <div class="division-head" style="border-top: 1px solid var(--line);" data-subdivision="div-projects" data-name="Отдел по правовому сопровождению крупных проектов" data-num="— Подразделение Управления III">
+        <div>
+          <div class="division-num">— Подразделение Управления III</div>
+          <div class="division-name" style="font-size: 20px;">Отдел по правовому сопровождению крупных проектов</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>1</span><br>Вакансий: <span>1</span>
+        </div>
+      </div>
+      <div class="roster" data-subdivision-roster="div-projects">
+        <div class="person" data-tags="lead vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag lead">Начальник отдела</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник отдела</span>
+            <span class="role-desc">Открытая позиция.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">294 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">294 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Асеев Михаил Валерьевич</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            <span class="role-desc">Задачи Краснокутского А.С. в части подготовки досудебных претензий и юридических заключений.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79095481899">+7&nbsp;909&nbsp;548&nbsp;18&nbsp;99</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">189 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">189 000 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="division" id="div-corp" data-division="Управление корпоративной работы">
+      <div class="division-head">
+        <div>
+          <div class="division-num">IV · Управление</div>
+          <div class="division-name">Управление корпоративной работы</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>5</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Кузнецова Алевтина Павловна</div>
+            <span class="role-tag lead">Начальник управления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник управления</span>
+            <span class="role-desc">Все вопросы корпоративного направления.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 303294</div>
+        <div class="mob"><a href="tel:+79160680371">+7&nbsp;916&nbsp;068&nbsp;03&nbsp;71</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">370 000 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">20%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">444 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="deputy">
+          <div>
+            <div class="person-name">Букашкина Людмила Анатольевна</div>
+            <span class="role-tag deputy">Руководитель направления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Руководитель направления</span>
+            <span class="role-desc">Регистраторы, нотариусы.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 303738</div>
+        <div class="mob"><a href="tel:+79163963923">+7&nbsp;916&nbsp;396&nbsp;39&nbsp;23</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">200 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">200 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="deputy">
+          <div>
+            <div class="person-name">Соловьева Елена Юрьевна</div>
+            <span class="role-tag deputy">Руководитель проектов</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Руководитель проектов</span>
+            <span class="role-desc">Все вопросы корпоративного направления; ФАС.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332493</div>
+        <div class="mob"><a href="tel:+79150823382">+7&nbsp;915&nbsp;082&nbsp;33&nbsp;82</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">240 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">240 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Никашкина Ольга Николаевна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            <span class="role-desc">Все вопросы корпоративного направления.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 32584</div>
+        <div class="mob"><a href="tel:+79856830202">+7&nbsp;985&nbsp;683&nbsp;02&nbsp;02</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">220 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">220 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Стопка Мария Сергеевна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            <span class="role-desc">Технические вопросы.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 332144</div>
+        <div class="mob"><a href="tel:+79113266334">+7&nbsp;911&nbsp;326&nbsp;63&nbsp;34</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">150 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">150 000 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="division" id="div-fas" data-division="Управление правоприменительной и антимонопольной практики">
+      <div class="division-head">
+        <div>
+          <div class="division-num">V · Управление</div>
+          <div class="division-name">Управление правоприменительной и антимонопольной практики</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>2</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Герасимова Екатерина Николаевна</div>
+            <span class="role-tag lead">Начальник управления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник управления</span>
+            <span class="role-desc">Соблюдение антимонопольного законодательства; получение согласий ФАС на сделки с основными средствами; закупки; запросы всех ОГВ.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 303365</div>
+        <div class="mob"><a href="tel:+79053900272">+7&nbsp;905&nbsp;390&nbsp;02&nbsp;72</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">263 000 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">30%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">341 900 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="deputy">
+          <div>
+            <div class="person-name">Ярославцев Дмитрий Александрович</div>
+            <span class="role-tag deputy">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            <span class="role-desc">Полноценно заменяет начальника управления по всем вопросам в случае его отсутствия.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 32029</div>
+        <div class="mob"><a href="tel:+79031584919">+7&nbsp;903&nbsp;158&nbsp;49&nbsp;19</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">241 500 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">241 500 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="section-title" data-section="sub">
+      <h2>Юридические службы <em>юрлиц холдинга</em></h2>
+      <span class="hint">Региональные и московские компании</span>
+    </div>
+
+
+    <section class="division subsidiary" id="sub-vrz" data-division="ООО «ВРЗ «Депо НТК»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">ВРЗ</div>
+          <div class="division-name">ООО «ВРЗ «Депо НТК»</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>2</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Каплюк Елена Петровна</div>
+            <span class="role-tag lead">Начальник отдела</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник отдела</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 25826</div>
+        <div class="mob"><a href="tel:+79188723545">+7&nbsp;918&nbsp;872&nbsp;35&nbsp;45</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">132 000 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">475 200 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">132 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Булатова Светлана Леонидовна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 25768</div>
+        <div class="mob"><a href="tel:+79187435648">+7&nbsp;918&nbsp;743&nbsp;56&nbsp;48</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">74 700 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">25% · 18 675 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">93 375 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-dtu" data-division="АО «ДТУ»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">ДТУ</div>
+          <div class="division-name">АО «ДТУ»</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>3</span><br>Вакансий: <span>1</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Лысаков Виталий Васильевич</div>
+            <span class="role-tag lead">Директор по юр. вопросам</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Заместитель исполнительного директора — Директор по юридическим вопросам</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 22012</div>
+        <div class="mob"><a href="tel:+79098882999">+7&nbsp;909&nbsp;888&nbsp;29&nbsp;99</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">117 895 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">25% · 29 474 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">1 008 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">280 001 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="deputy">
+          <div>
+            <div class="person-name">Ускова Анастасия Сергеевна</div>
+            <span class="role-tag deputy">Начальник отдела</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник юридического отдела</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 22168</div>
+        <div class="mob"><a href="tel:+79141643775">+7&nbsp;914&nbsp;164&nbsp;37&nbsp;75</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">73 082 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">25% · 18 270 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">173 570 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Семенюк Виктория Викторовна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 22034</div>
+        <div class="mob"><a href="tel:+79141922765">+7&nbsp;914&nbsp;192&nbsp;27&nbsp;65</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">42 684 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">25% · 10 671 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">101 374 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Старший юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Старший юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">42 684 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">25% · 10 671 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">101 374 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-tbt" data-division="ООО «ТБТ»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">ТБТ</div>
+          <div class="division-name">ООО «ТБТ»</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>3</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Карманов Александр Юрьевич</div>
+            <span class="role-tag lead">Директор по юр. вопросам</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Директор по юридическим вопросам</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 57-007</div>
+        <div class="mob"><a href="tel:+79183442359">+7&nbsp;918&nbsp;344&nbsp;23&nbsp;59</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">187 200 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">449 280 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">187 200 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="deputy">
+          <div>
+            <div class="person-name">Калмыкова Олеся Юрьевна</div>
+            <span class="role-tag deputy">Начальник отдела</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник юридического отдела</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 57-044</div>
+        <div class="mob"><a href="tel:+79181573896">+7&nbsp;918&nbsp;157&nbsp;38&nbsp;96</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">110 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">132 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Корехова Анна Владимировна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 57-084</div>
+        <div class="mob"><a href="tel:+79528225529">+7&nbsp;952&nbsp;822&nbsp;55&nbsp;29</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">70 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">84 000 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-etu" data-division="ООО «ЕТУ»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">ЕТУ</div>
+          <div class="division-name">ООО «ЕТУ»</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>4</span><br>Вакансий: <span>3</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Грандлер Лерия Романовна</div>
+            <span class="role-tag lead">Директор по юр. вопросам</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Директор по юридическим вопросам</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 30045</div>
+        <div class="mob"><a href="tel:+79184986008">+7&nbsp;918&nbsp;498&nbsp;60&nbsp;08</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">380 000 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">1 368 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">380 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Деревенец Иван Викторович</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 30090</div>
+        <div class="mob"><a href="tel:+79184431991">+7&nbsp;918&nbsp;443&nbsp;19&nbsp;91</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">188 910 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">217 246 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Сырвачев Владимир Ильич</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79129122252">+7&nbsp;912&nbsp;912&nbsp;22&nbsp;52</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">188 910 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">217 246 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Мостовая Юлия Александровна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79217403158">+7&nbsp;921&nbsp;740&nbsp;31&nbsp;58</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">188 910 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">188 910 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">141 960 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">141 960 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Ведущий юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Ведущий юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">57 750 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">57 750 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Ведущий юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Ведущий юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">57 750 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">57 750 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-skmp" data-division="ООО «СК «Малый порт»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">СК МП</div>
+          <div class="division-name">ООО «СК «Малый порт»</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>3</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Омельченко Ольга Александровна</div>
+            <span class="role-tag lead">Директор по юр. вопросам</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Заместитель исполнительного директора — Директор по юридическим вопросам</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 323906</div>
+        <div class="mob"><a href="tel:+79532092949">+7&nbsp;953&nbsp;209&nbsp;29&nbsp;49</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">128 300 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">30% · 38 490 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">1 231 676 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">266 864 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Беляева Татьяна Владимировна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт (договорное направление)</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79147133185">+7&nbsp;914&nbsp;713&nbsp;31&nbsp;85</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">72 659 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">30% · 21 798 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">151 131 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Гавриленко Светлана Владимировна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт (судебное направление)</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79025065533">+7&nbsp;902&nbsp;506&nbsp;55&nbsp;33</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">78 745 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">30% · 23 624 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">163 790 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-masko" data-division="АО «МАСКО»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">МАСКО</div>
+          <div class="division-name">АО «МАСКО»</div>
+          <div class="sub-note">Романов А.В. — процесс сокращения, последний рабочий день 30.04.</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>2</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Романов Александр Владимирович</div>
+            <span class="role-tag lead">Зам. ген. директора</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Заместитель генерального директора</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 8 (815 2) 42-21-10</div>
+        <div class="mob"><a href="tel:+79022818284">+7&nbsp;902&nbsp;281&nbsp;82&nbsp;84</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">468 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">260 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Радочина Ольга Владимировна</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 8 (815 2) 42-21-10</div>
+        <div class="mob"><a href="tel:+79512961015">+7&nbsp;951&nbsp;296&nbsp;10&nbsp;15</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">24 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">234 048 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-mmtp" data-division="АО «ММТП»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">ММТП</div>
+          <div class="division-name">АО «ММТП»</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>3</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Иванова Ирина Олеговна</div>
+            <span class="role-tag lead">Зам. исп. директора</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Заместитель исполнительного директора (по юридическим вопросам)</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. (815 2) 48-06-68</div>
+        <div class="mob"><a href="tel:+79969346518">+7&nbsp;996&nbsp;934&nbsp;65&nbsp;18</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">36 098 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">83 024 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Глинская Евгения Геннадьевна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. (815 2) 48-03-87</div>
+        <div class="mob"><a href="tel:+79113122051">+7&nbsp;911&nbsp;312&nbsp;20&nbsp;51</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">55 085 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">35% · 19 280 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">163 602 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Чунина Карина Геннадьевна</div>
+            <span class="role-tag">Ведущий юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Ведущий юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. (815 2) 48-05-66</div>
+        <div class="mob"><a href="tel:+79118049516">+7&nbsp;911&nbsp;804&nbsp;95&nbsp;16</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">42 541 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">15% · 6 381 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">107 629 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-mbt" data-division="ООО «МБТ»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">МБТ</div>
+          <div class="division-name">ООО «МБТ»</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>2</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Иванова Ирина Олеговна</div>
+            <span class="role-tag lead">Зам. исп. директора</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Заместитель исполнительного директора (по юридическим вопросам)</span>
+            
+            <span class="role-note">по совместительству · также АО ММТП</span>
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. (815 2) 48-06-68</div>
+        <div class="mob"><a href="tel:+79969346518">+7&nbsp;996&nbsp;934&nbsp;65&nbsp;18</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">36 098 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">0 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">83 024 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Александрова Елена Анатольевна</div>
+            <span class="role-tag">Ведущий юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Ведущий юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. (815 2) 48-02-53</div>
+        <div class="mob"><a href="tel:+79211726678">+7&nbsp;921&nbsp;172&nbsp;66&nbsp;78</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">36 389 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">20% · 8 369 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">115 499 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-ntk-rail" data-division="ООО «НТКрэйл», АО «КФС-Транс», ООО «НацЛогистик»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">НТКрэйл / КФС / НацЛогистик</div>
+          <div class="division-name">ООО «НТКрэйл», АО «КФС-Транс», ООО «НацЛогистик»</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>1</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Боженко Ольга Алексеевна</div>
+            <span class="role-tag lead">Ведущий юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Ведущий юрисконсульт ООО «НТКрэйл» (основная работа); Ведущий юрисконсульт АО «КФС-Транс» (по совместительству); Юрист ООО «НацЛогистик» (по совместительству)</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. (495) 108-49-39 доб. 205</div>
+        <div class="mob"><a href="tel:+79653287253">+7&nbsp;965&nbsp;328&nbsp;72&nbsp;53</a></div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-ehsz2" data-division="ООО «ЕХСЗ-2» (ЕвроХим Северо-Запад-2, Кингисепп)">
+      <div class="division-head">
+        <div>
+          <div class="division-num">ЕХСЗ-2</div>
+          <div class="division-name">ООО «ЕХСЗ-2» (ЕвроХим Северо-Запад-2, Кингисепп)</div>
+          <div class="sub-note">Конфликт начальника управления со строительным менеджментом. План: взять заместителя с прицелом на замену.</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>3</span><br>Вакансий: <span>3</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Федосеева Ангелина Геннадьевна</div>
+            <span class="role-tag lead">Начальник управления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник управления по правовому сопровождению</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 131212</div>
+        <div class="mob"><a href="tel:+79818414162">+7&nbsp;981&nbsp;841&nbsp;41&nbsp;62</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">300 000 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">300 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Филатова Наталья Леонидовна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 131408</div>
+        <div class="mob"><a href="tel:+79325525822">+7&nbsp;932&nbsp;552&nbsp;58&nbsp;22</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">78 010 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">207 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Кузнецова Елена Сергеевна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="ext">вн. 131403</div>
+        <div class="mob"><a href="tel:+79046340016">+7&nbsp;904&nbsp;634&nbsp;00&nbsp;16</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">78 010 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">207 000 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">46 740 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">46 740 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">78 010 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">46 740 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">46 740 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">46 740 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-nts" data-division="АО «НефтеТрансСервис» (НТС)">
+      <div class="division-head">
+        <div>
+          <div class="division-num">НТС</div>
+          <div class="division-name">АО «НефтеТрансСервис» (НТС)</div>
+          
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>14</span><br>Вакансий: <span>1</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="subdept-head">Руководство</div>
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Шапакидзе Вахтанг Ясонович</div>
+            <span class="role-tag lead">Зам. ген. директора</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Заместитель генерального директора</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79689036557">+7&nbsp;968&nbsp;903&nbsp;65&nbsp;57</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">1 050 000 ₽</span></span><span class="pay-item"><span class="pay-key">Годовой бонус</span><span class="pay-val ">100%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">2 100 000 ₽</span></span></div></div>
+        </div>
+        <div class="subdept-head">Управление судебной работы</div>
+        <div class="person" data-tags="lead">
+          <div>
+            <div class="person-name">Федоров Виктор Владимирович</div>
+            <span class="role-tag lead">Начальник управления</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник управления</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79099956746">+7&nbsp;909&nbsp;995&nbsp;67&nbsp;46</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">424 696 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">50%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">637 044 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Бережнюк Елизавета Алексеевна</div>
+            <span class="role-tag">Менеджер по судебной работе</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Менеджер по судебной работе</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79151005287">+7&nbsp;915&nbsp;100&nbsp;52&nbsp;87</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">263 431 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">15%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">302 946 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Волков Виктор Владимирович</div>
+            <span class="role-tag">Менеджер по судебной работе</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Менеджер по судебной работе</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79091639946">+7&nbsp;909&nbsp;163&nbsp;99&nbsp;46</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">272 921 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">15%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">313 859 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Волокитин Илья Игоревич</div>
+            <span class="role-tag">Ведущий юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Ведущий юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79205123166">+7&nbsp;920&nbsp;512&nbsp;31&nbsp;66</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">160 377 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">10%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">176 415 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Косик Валерия Владимировна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">221 812 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">10%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">243 993 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Шестаков Артём Максимович</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79696272870">+7&nbsp;969&nbsp;627&nbsp;28&nbsp;70</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">132 000 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">10%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">145 200 ₽</span></span></div></div>
+        </div>
+        <div class="subdept-head">Корпоративный отдел</div>
+        <div class="person" data-tags="deputy">
+          <div>
+            <div class="person-name">Черешнева Татьяна Львовна</div>
+            <span class="role-tag deputy">Начальник отдела</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник отдела</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">296 641 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">30%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">385 633 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Быстрякова Светлана Анатольевна</div>
+            <span class="role-tag">Главный юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Главный юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79037463055">+7&nbsp;903&nbsp;746&nbsp;30&nbsp;55</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">161 886 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">22%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">198 310 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Елбаева Наталья Абуевна</div>
+            <span class="role-tag">Менеджер</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Менеджер по антимонопольному комплаенсу</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">448 614 ₽</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">89 723 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Петров Алексей Александрович</div>
+            <span class="role-tag">Юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79999662551">+7&nbsp;999&nbsp;966&nbsp;25&nbsp;51</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">194 106 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">10%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">213 517 ₽</span></span></div></div>
+        </div>
+        <div class="subdept-head">Общеправовой отдел</div>
+        <div class="person" data-tags="deputy">
+          <div>
+            <div class="person-name">Александрова Елена Валерьевна</div>
+            <span class="role-tag deputy">Начальник отдела</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Начальник отдела</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79166575441">+7&nbsp;916&nbsp;657&nbsp;54&nbsp;41</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">323 834 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">30%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">420 984 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="vacancy">
+          <div>
+            <div class="person-name vacancy">Вакансия</div>
+            <span class="role-tag">Менеджер</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Менеджер по общеправовой работе</span>
+            <span class="role-desc">Открытая позиция.</span>
+            
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">204 725 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">15%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">235 434 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Малькова Мария Дмитриевна</div>
+            <span class="role-tag">Ведущий юрисконсульт</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Ведущий юрисконсульт</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79371757928">+7&nbsp;937&nbsp;175&nbsp;79&nbsp;28</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">116 981 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">10%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">128 679 ₽</span></span></div></div>
+        </div>
+
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Харченко Константин Николаевич</div>
+            <span class="role-tag">Менеджер</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Менеджер</span>
+            
+            
+          </div>
+          <div class="person-phone">
+        <div class="mob"><a href="tel:+79295906039">+7&nbsp;929&nbsp;590&nbsp;60&nbsp;39</a></div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">247 531 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">15%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">284 661 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="division subsidiary" id="sub-asia" data-division="ТОО «АзияНефтеТранс»">
+      <div class="division-head">
+        <div>
+          <div class="division-num">АНТ</div>
+          <div class="division-name">ТОО «АзияНефтеТранс»</div>
+          <div class="sub-note">Казахстан. Курс 1 руб ≈ 6,25 тенге.</div>
+        </div>
+        <div class="division-stats">
+          Сотрудников: <span>1</span>
+        </div>
+      </div>
+      <div class="roster">
+        <div class="person" data-tags="">
+          <div>
+            <div class="person-name">Шуйпанова Айжан Мендыхановна</div>
+            <span class="role-tag">Юрист</span>
+          </div>
+          <div class="person-role">
+            <span class="role-title">Юрист</span>
+            
+            <span class="role-note">Курс 1 рубля к тенге: 6,25 тенге</span>
+          </div>
+          <div class="person-phone">
+        <div class="empty">не указан</div>
+          </div>
+          <div class="payroll-locked" data-locked="1"><div class="payroll-list"><span class="pay-item"><span class="pay-key">Оклад</span><span class="pay-val ">110 996 ₽</span></span><span class="pay-item"><span class="pay-key">Премия кв.</span><span class="pay-val ">10%</span></span><span class="pay-item"><span class="pay-key">ФОТ/мес</span><span class="pay-val pay-fot">122 096 ₽</span></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="empty-state" id="emptyState">Ничего не найдено по вашему запросу</div>
+
+  </main>
+
+  </div><!-- /panel-list -->
+
+  <!-- ============ ВКЛАДКА: ОРГАНОГРАММА ============ -->
+  <div class="tab-panel" id="panel-chart">
+    <div class="org-chart">
+      <div class="org-tree">
+
+        <!-- Корень -->
+        <div class="org-root">
+          <button class="org-block root" data-division-id="div-direction">
+            <div class="org-block-label">I · Дирекция</div>
+            <div class="org-block-name">Дирекция по юридическим вопросам</div>
+            <div class="org-block-meta">
+              <span>Директор: <b>Трубицын К.А.</b></span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Уровень управлений ЮД ПА -->
+        <div class="org-level">
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-court">
+              <div class="org-block-label">II · Управление</div>
+              <div class="org-block-name">Судебное управление</div>
+              <div class="org-block-meta">
+                <span><b>5</b> сотр.</span>
+                <span><b>1</b> вак.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-contract">
+              <div class="org-block-label">III · Управление</div>
+              <div class="org-block-name">Договорное управление</div>
+              <div class="org-block-meta">
+                <span><b>5</b> сотр.</span>
+                <span>+ отдел</span>
+              </div>
+            </button>
+            <div class="org-sub">
+              <button class="org-block sub" data-division-id="div-projects">
+                <div class="org-block-label">— Отдел</div>
+                <div class="org-block-name">Крупных проектов</div>
+                <div class="org-block-meta">
+                  <span><b>2</b> сотр.</span>
+                  <span><b>1</b> вак.</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-corp">
+              <div class="org-block-label">IV · Управление</div>
+              <div class="org-block-name">Корпоративное управление</div>
+              <div class="org-block-meta">
+                <span><b>5</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-fas">
+              <div class="org-block-label">V · Управление</div>
+              <div class="org-block-name">Антимонопольное управление</div>
+              <div class="org-block-meta">
+                <span><b>2</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch">
+            <button class="org-block" data-division-id="div-regulatory">
+              <div class="org-block-label">Отдел</div>
+              <div class="org-block-name">Регуляторных рисков</div>
+              <div class="org-block-meta">
+                <span><b>1</b> сотр.</span>
+              </div>
+            </button>
+            <div class="org-sub">
+              <button class="org-block sub" data-division-id="div-projects-lead">
+                <div class="org-block-label">Направление</div>
+                <div class="org-block-name">ЕХСЗ-2 (стройка)</div>
+                <div class="org-block-meta">
+                  <span><b>1</b> сотр.</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Юрлица холдинга -->
+        <div class="org-section-label teal">Юрлица холдинга</div>
+        <div class="org-companies-grid">
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-vrz">
+              <div class="org-block-label">ВРЗ</div>
+              <div class="org-block-name">ООО «ВРЗ «Депо НТК»</div>
+              <div class="org-block-meta">
+                <span><b>2</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-dtu">
+              <div class="org-block-label">ДТУ</div>
+              <div class="org-block-name">АО «ДТУ»</div>
+              <div class="org-block-meta">
+                <span><b>4</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-tbt">
+              <div class="org-block-label">ТБТ</div>
+              <div class="org-block-name">ООО «ТБТ»</div>
+              <div class="org-block-meta">
+                <span><b>3</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-etu">
+              <div class="org-block-label">ЕТУ</div>
+              <div class="org-block-name">ООО «ЕТУ»</div>
+              <div class="org-block-meta">
+                <span><b>7</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-skmp">
+              <div class="org-block-label">СК МП</div>
+              <div class="org-block-name">ООО «СК «Малый порт»</div>
+              <div class="org-block-meta">
+                <span><b>3</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-masko">
+              <div class="org-block-label">МАСКО</div>
+              <div class="org-block-name">АО «МАСКО»</div>
+              <div class="org-block-meta">
+                <span><b>2</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-mmtp">
+              <div class="org-block-label">ММТП</div>
+              <div class="org-block-name">АО «ММТП»</div>
+              <div class="org-block-meta">
+                <span><b>3</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-mbt">
+              <div class="org-block-label">МБТ</div>
+              <div class="org-block-name">ООО «МБТ»</div>
+              <div class="org-block-meta">
+                <span><b>2</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-ntk-rail">
+              <div class="org-block-label">НТКрэйл / КФС / НацЛогистик</div>
+              <div class="org-block-name">ООО «НТКрэйл», АО «КФС-Транс», ООО «НацЛогистик»</div>
+              <div class="org-block-meta">
+                <span><b>1</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-ehsz2">
+              <div class="org-block-label">ЕХСЗ-2</div>
+              <div class="org-block-name">ООО «ЕХСЗ-2» (ЕвроХим Северо-Запад-2, Кингисепп)</div>
+              <div class="org-block-meta">
+                <span><b>6</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-nts">
+              <div class="org-block-label">НТС</div>
+              <div class="org-block-name">АО «НефтеТрансСервис» (НТС)</div>
+              <div class="org-block-meta">
+                <span><b>15</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="org-branch sub-branch">
+            <button class="org-block sub-co" data-division-id="sub-asia">
+              <div class="org-block-label">АНТ</div>
+              <div class="org-block-name">ТОО «АзияНефтеТранс»</div>
+              <div class="org-block-meta">
+                <span><b>1</b> сотр.</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /panel-chart -->
+
+  <!-- ============ МОДАЛЬНОЕ ОКНО ============ -->
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <div class="division-num" id="modal-num"></div>
+          <div class="division-name" id="modal-title"></div>
+        </div>
+        <button class="modal-close" id="modalClose" aria-label="Закрыть">×</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--accent)"></span>Руководящие позиции</span>
+      <span><span class="dot" style="background:var(--gold)"></span>Заместители / руководители направлений</span>
+      <span><span class="dot" style="background:var(--teal)"></span>Юрлица холдинга</span>
+      <span><span class="dot" style="background:var(--vacancy)"></span>Вакансии</span>
+    </div>
+    <div>Документ для внутреннего использования · ЮД ПА/НТК</div>
+  </footer>
+
+</div>
+
+<script>
+  // === Поиск ===
+  const searchInput = document.getElementById('searchInput');
+  const emptyState = document.getElementById('emptyState');
+  let activeFilter = 'all';
+
+  function applyFilters() {
+    const q = searchInput.value.trim().toLowerCase();
+    let totalVisible = 0;
+
+    document.querySelectorAll('.section-title').forEach(st => {
+      const sec = st.dataset.section;
+      let showSection = (activeFilter === 'all' || activeFilter === 'leads' || activeFilter === 'vacancy' || activeFilter === sec);
+      st.style.display = showSection ? '' : 'none';
+    });
+
+    document.querySelectorAll('.division').forEach(div => {
+      const isSub = div.classList.contains('subsidiary');
+      const sectionType = isSub ? 'sub' : 'hq';
+
+      let sectionAllowed = true;
+      if (activeFilter === 'hq' && isSub) sectionAllowed = false;
+      if (activeFilter === 'sub' && !isSub) sectionAllowed = false;
+
+      const persons = div.querySelectorAll('.person');
+      let divHasVisible = false;
+
+      persons.forEach(p => {
+        const text = p.textContent.toLowerCase();
+        const tags = (p.dataset.tags || '').split(' ');
+
+        const matchSearch = !q || text.includes(q);
+        let matchFilter = sectionAllowed;
+        if (activeFilter === 'leads') matchFilter = tags.includes('lead') || tags.includes('deputy');
+        else if (activeFilter === 'vacancy') matchFilter = tags.includes('vacancy');
+
+        const visible = matchSearch && matchFilter;
+        p.style.display = visible ? '' : 'none';
+        if (visible) { divHasVisible = true; totalVisible++; }
+      });
+
+      div.style.display = divHasVisible ? '' : 'none';
+    });
+
+    emptyState.style.display = totalVisible === 0 ? 'block' : 'none';
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+
+  document.querySelectorAll('#filterChips .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#filterChips .chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  // === Переключение вкладок ===
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // === Модальное окно ===
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalNum = document.getElementById('modal-num');
+  const modalBody = document.getElementById('modal-body');
+
+  function openDivisionModal(divId) {
+    let title = '', num = '', personsHTML = '';
+
+    if (divId === 'div-projects') {
+      const head = document.querySelector('[data-subdivision="div-projects"]');
+      const roster = document.querySelector('[data-subdivision-roster="div-projects"]');
+      if (head && roster) {
+        title = head.dataset.name;
+        num = head.dataset.num;
+        personsHTML = roster.innerHTML;
+      }
+    } else {
+      const section = document.getElementById(divId);
+      if (!section) return;
+      const headDiv = section.querySelector('.division-head .division-num');
+      const headName = section.querySelector('.division-head .division-name');
+      num = headDiv ? headDiv.textContent : '';
+      title = headName ? headName.textContent : '';
+      const firstRoster = section.querySelector('.roster');
+      personsHTML = firstRoster ? firstRoster.innerHTML : '';
+    }
+
+    modalTitle.textContent = title;
+    modalNum.textContent = num;
+    modalBody.innerHTML = personsHTML;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.org-block').forEach(block => {
+    block.addEventListener('click', () => {
+      const id = block.dataset.divisionId;
+      if (id) openDivisionModal(id);
+    });
+  });
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (modal.classList.contains('open')) closeModal();
+      if (fotModal.classList.contains('open')) closeFotModal();
+    }
+  });
+
+  // === Защищённый доступ к финансовым данным ===
+  // Прототип: SHA-256 без соли. В продакшене — серверная проверка.
+  const PAYROLL_HASH = '168090dc6cf14df79eb44f9dc61db2b9e90c5ecb4d936435347364b9c54b9304';
+
+  async function sha256(text) {
+    const buf = new TextEncoder().encode(text);
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  const fotModal = document.getElementById('fotModal');
+  const btnFot = document.getElementById('btnFot');
+  const pbInput = document.getElementById('pbInput');
+  const pbButton = document.getElementById('pbButton');
+  const pbLockButton = document.getElementById('pbLockButton');
+  const pbError = document.getElementById('pbError');
+  const fotModalClose = document.getElementById('fotModalClose');
+
+  function openFotModal() {
+    fotModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (!document.body.classList.contains('payroll-unlocked')) {
+      setTimeout(() => pbInput.focus(), 100);
+    }
+    pbError.textContent = '';
+  }
+
+  function closeFotModal() {
+    fotModal.classList.remove('open');
+    document.body.style.overflow = '';
+    pbError.textContent = '';
+    pbInput.value = '';
+  }
+
+  function unlockPayroll() {
+    document.body.classList.add('payroll-unlocked');
+    btnFot.classList.add('unlocked');
+    btnFot.querySelector('span').textContent = 'ФОТ открыт';
+    sessionStorage.setItem('payrollUnlocked', '1');
+  }
+
+  function lockPayroll() {
+    document.body.classList.remove('payroll-unlocked');
+    btnFot.classList.remove('unlocked');
+    btnFot.querySelector('span').textContent = 'ФОТ';
+    sessionStorage.removeItem('payrollUnlocked');
+    pbInput.value = '';
+    pbError.textContent = '';
+  }
+
+  async function tryUnlock() {
+    const val = pbInput.value.trim();
+    if (!val) return;
+    const h = await sha256(val);
+    if (h === PAYROLL_HASH) {
+      unlockPayroll();
+      pbError.textContent = '';
+      // Закрыть модалку через короткую паузу, чтобы пользователь увидел смену состояния
+      setTimeout(() => closeFotModal(), 350);
+    } else {
+      pbError.textContent = 'Неверный код. Попробуйте ещё раз.';
+      pbInput.value = '';
+      pbInput.focus();
+    }
+  }
+
+  btnFot.addEventListener('click', openFotModal);
+  fotModalClose.addEventListener('click', closeFotModal);
+  fotModal.addEventListener('click', (e) => { if (e.target === fotModal) closeFotModal(); });
+  pbButton.addEventListener('click', tryUnlock);
+  pbInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+  pbLockButton.addEventListener('click', () => { lockPayroll(); closeFotModal(); });
+
+  // Восстановление состояния в рамках сессии браузера
+  if (sessionStorage.getItem('payrollUnlocked') === '1') {
+    unlockPayroll();
+  }
+</script>
+</body>
+</html>
