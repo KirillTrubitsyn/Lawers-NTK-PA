@@ -1,17 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <rect width="512" height="512" rx="96" fill="#f5f2ec"/>
-  <rect x="32" y="32" width="448" height="448" rx="72" fill="none" stroke="#6e1f1f" stroke-width="6"/>
-  <g transform="translate(256 268)" fill="none" stroke="#6e1f1f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="0" y1="-150" x2="0" y2="120"/>
-    <line x1="-70" y1="120" x2="70" y2="120"/>
-    <line x1="-150" y1="-110" x2="150" y2="-110"/>
-    <circle cx="0" cy="-150" r="10" fill="#a8895e" stroke="none"/>
-    <line x1="-110" y1="-110" x2="-160" y2="10"/>
-    <line x1="-110" y1="-110" x2="-60" y2="10"/>
-    <path d="M -170 10 Q -110 -30 -50 10" stroke="#a8895e" stroke-width="10"/>
-    <line x1="110" y1="-110" x2="60" y2="10"/>
-    <line x1="110" y1="-110" x2="160" y2="10"/>
-    <path d="M 50 10 Q 110 -30 170 10" stroke="#a8895e" stroke-width="10"/>
+  <rect x="28" y="28" width="456" height="456" rx="76" fill="none" stroke="#d8d2c4" stroke-width="3"/>
+
+  <g fill="none" stroke="#6e1f1f" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="256" y1="148" x2="256" y2="372"/>
+    <line x1="120" y1="194" x2="392" y2="194"/>
+    <line x1="180" y1="372" x2="332" y2="372"/>
+    <line x1="220" y1="332" x2="292" y2="332"/>
+    <line x1="220" y1="332" x2="180" y2="372"/>
+    <line x1="292" y1="332" x2="332" y2="372"/>
   </g>
-  <text x="256" y="448" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="600" fill="#1a1d24" letter-spacing="4">ПА · НТК</text>
+
+  <circle cx="256" cy="148" r="14" fill="#a8895e"/>
+
+  <line x1="120" y1="194" x2="120" y2="244" stroke="#6e1f1f" stroke-width="6" stroke-linecap="round"/>
+  <line x1="392" y1="194" x2="392" y2="244" stroke="#6e1f1f" stroke-width="6" stroke-linecap="round"/>
+
+  <path d="M 64 244 Q 120 304 176 244 Z" fill="#a8895e" stroke="#6e1f1f" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M 336 244 Q 392 304 448 244 Z" fill="#6e1f1f" stroke="#6e1f1f" stroke-width="6" stroke-linejoin="round"/>
 </svg>
