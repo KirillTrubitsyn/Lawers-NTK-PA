@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Юридическая служба · Холдинг Портовый Альянс / НТК</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#6e1f1f">
+<meta name="application-name" content="Юр. служба ПА/НТК">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Юр. служба ПА/НТК">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -3075,6 +3083,12 @@
   // Восстановление состояния в рамках сессии браузера
   if (sessionStorage.getItem('payrollUnlocked') === '1') {
     unlockPayroll();
+  }
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
   }
 </script>
 </body>
