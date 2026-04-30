@@ -1,25 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="96" fill="#f5f2ec"/>
-  <rect x="28" y="28" width="456" height="456" rx="76" fill="none" stroke="#d8d2c4" stroke-width="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid slice">
+  <!-- Полностью залитый квадрат — iOS не добавит белые поля -->
+  <rect width="512" height="512" fill="#6e1f1f"/>
 
-  <!-- Верх: рельсы (НТК / ЖД) -->
-  <g stroke="#6e1f1f" fill="none" stroke-linecap="round">
-    <line x1="112" y1="156" x2="400" y2="156" stroke-width="14"/>
-    <line x1="112" y1="200" x2="400" y2="200" stroke-width="14"/>
-    <line x1="156" y1="140" x2="156" y2="216" stroke-width="6"/>
-    <line x1="216" y1="140" x2="216" y2="216" stroke-width="6"/>
-    <line x1="276" y1="140" x2="276" y2="216" stroke-width="6"/>
-    <line x1="336" y1="140" x2="336" y2="216" stroke-width="6"/>
+  <!-- Wordmark "НТК/ПА" -->
+  <g fill="#f5e7c8" font-family="Georgia, 'Times New Roman', serif" font-weight="700" text-anchor="middle">
+    <text x="256" y="138" font-size="84" letter-spacing="2">НТК/ПА</text>
   </g>
 
-  <!-- Связка: вертикальный поток -->
-  <line x1="256" y1="220" x2="256" y2="276" stroke="#a8895e" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 8"/>
+  <!-- Декоративная разделительная линия -->
+  <line x1="120" y1="170" x2="392" y2="170" stroke="#a8895e" stroke-width="2" opacity=".55"/>
 
-  <!-- Низ: якорь / порт (ПА) -->
-  <g fill="none" stroke="#6e1f1f" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="256" cy="296" r="16" fill="#a8895e" stroke-width="4"/>
-    <line x1="256" y1="312" x2="256" y2="412"/>
-    <line x1="208" y1="346" x2="304" y2="346"/>
-    <path d="M 168 364 Q 168 412 256 412 Q 344 412 344 364"/>
+  <!-- Поезд (слева) -->
+  <g fill="#d8b377" stroke="#d8b377" stroke-linejoin="round">
+    <!-- Корпус -->
+    <rect x="78" y="240" width="120" height="70" rx="6"/>
+    <!-- Крыша/нос -->
+    <path d="M78 240 L78 220 L168 220 L198 240 Z"/>
+    <!-- Окно кабины -->
+    <rect x="92" y="248" width="34" height="22" fill="#6e1f1f"/>
+    <!-- Решётка -->
+    <rect x="135" y="248" width="55" height="22" fill="#6e1f1f"/>
+    <line x1="148" y1="252" x2="148" y2="266" stroke="#d8b377" stroke-width="1.5"/>
+    <line x1="160" y1="252" x2="160" y2="266" stroke="#d8b377" stroke-width="1.5"/>
+    <line x1="172" y1="252" x2="172" y2="266" stroke="#d8b377" stroke-width="1.5"/>
+    <line x1="184" y1="252" x2="184" y2="266" stroke="#d8b377" stroke-width="1.5"/>
+    <!-- Колёса -->
+    <circle cx="106" cy="318" r="14" fill="#d8b377" stroke="#6e1f1f" stroke-width="3"/>
+    <circle cx="148" cy="318" r="14" fill="#d8b377" stroke="#6e1f1f" stroke-width="3"/>
+    <circle cx="190" cy="318" r="14" fill="#d8b377" stroke="#6e1f1f" stroke-width="3"/>
+    <!-- Вагон-конус (груз) -->
+    <path d="M198 310 L260 310 L240 250 L218 250 Z" fill="#d8b377"/>
   </g>
+
+  <!-- Кривая дорога/стрелка от поезда к кораблю -->
+  <g fill="none" stroke="#d8b377" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 200 350 C 240 388, 280 388, 320 360"/>
+    <!-- Наконечник стрелы -->
+    <path d="M 314 348 L 320 360 L 308 366" stroke-width="6"/>
+  </g>
+
+  <!-- Корабль (справа) -->
+  <g fill="#d8b377" stroke="#d8b377" stroke-linejoin="round">
+    <!-- Дымовая труба / надстройка -->
+    <rect x="350" y="220" width="34" height="54" rx="2"/>
+    <!-- Звезда на надстройке -->
+    <path d="M367 234 L370 244 L380 244 L372 250 L375 260 L367 254 L359 260 L362 250 L354 244 L364 244 Z" fill="#6e1f1f"/>
+    <!-- Палуба -->
+    <rect x="316" y="274" width="118" height="22"/>
+    <!-- Корпус -->
+    <path d="M300 296 L450 296 L424 340 L326 340 Z" fill="#d8b377"/>
+    <!-- Иллюминаторы -->
+    <circle cx="346" cy="318" r="5" fill="#6e1f1f"/>
+    <circle cx="376" cy="318" r="5" fill="#6e1f1f"/>
+    <circle cx="406" cy="318" r="5" fill="#6e1f1f"/>
+  </g>
+
+  <!-- Волна -->
+  <path d="M 286 360 Q 320 372, 354 360 T 422 360 T 480 360"
+        fill="none" stroke="#d8b377" stroke-width="4" stroke-linecap="round" opacity=".7"/>
 </svg>
