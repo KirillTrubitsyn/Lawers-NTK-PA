@@ -1,11 +1,11 @@
-const CACHE_VERSION = 'lawers-ntk-pa-v11';
+const CACHE_VERSION = 'lawers-ntk-pa-v12';
 const PRECACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
   './icon.svg',
   './icon-maskable.svg',
-  './apple-touch-icon.svg',
+  './apple-touch-icon.png',
   './logo_ntc-pa.png'
 ];
 
