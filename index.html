@@ -159,22 +159,19 @@
   }
   .brand-logo-wrap {
     flex-shrink: 0;
-    width: 96px;
-    height: 96px;
+    width: 132px;
+    height: 132px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-paper);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 8px;
-    box-shadow: var(--shadow-card);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(26,29,36,.05), 0 12px 32px -16px rgba(110,31,31,.25);
   }
   .brand-logo {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
   .brand-text { min-width: 0; }
@@ -238,50 +235,62 @@
 
   .meta {
     text-align: right;
-    font-size: 12px;
+    font-size: 12.5px;
     color: var(--ink-mute);
     font-feature-settings: 'tnum';
     line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
   }
-  .meta-card {
-    display: inline-block;
-    text-align: right;
-    padding: 14px 18px;
-    background: var(--bg-paper);
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    box-shadow: var(--shadow-card);
-    min-width: 220px;
-  }
-  .meta-card .meta-label {
-    display: block;
-    font-size: 9.5px;
+  .variant-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
+    color: var(--ink-mute);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
   }
-  .meta-card strong {
-    display: block;
+  .variant-badge b { color: var(--ink); font-weight: 700; letter-spacing: 0.04em; }
+  .meta-block {
+    text-align: right;
+    line-height: 1.65;
+  }
+  .meta-block .meta-headline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
     font-weight: 600;
     color: var(--ink);
-    font-size: 13px;
-    margin-bottom: 2px;
-    letter-spacing: 0;
-    text-transform: none;
+    margin-bottom: 4px;
   }
-  .meta-card .meta-row {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    font-size: 11.5px;
+  .meta-block .meta-headline svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .meta-block .meta-line {
+    font-size: 12.5px;
     color: var(--ink-mute);
   }
-  .meta-card .meta-row + .meta-row { margin-top: 2px; }
-  .meta-card .meta-row b {
+  .meta-block .meta-line b {
     color: var(--ink);
     font-weight: 600;
+  }
+  .meta-block .meta-source {
+    color: var(--ink-mute);
   }
 
   /* === СВОДКА === */
@@ -289,44 +298,41 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    margin-bottom: 48px;
-    border: 1px solid var(--line);
-    background: var(--bg-paper);
-    border-radius: 3px;
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
+    margin-bottom: 36px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
   }
   .summary > div {
-    padding: 24px 26px 22px;
-    border-right: 1px solid var(--line-soft);
-    position: relative;
-    transition: background .15s ease;
-  }
-  .summary > div:hover { background: rgba(255,255,255,.6); }
-  .summary > div:last-child { border-right: none; }
-  .summary .kpi-head {
+    padding: 4px 28px 4px 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    color: var(--ink-mute);
+    gap: 18px;
+    position: relative;
   }
-  .summary .kpi-head svg {
-    width: 18px;
-    height: 18px;
+  .summary > div + div {
+    border-left: 1px solid var(--line-soft);
+    padding-left: 28px;
+  }
+  .summary .kpi-text { flex: 1; min-width: 0; }
+  .summary .kpi-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-mute);
+    opacity: .8;
+  }
+  .summary .kpi-icon svg {
+    width: 28px;
+    height: 28px;
     stroke: currentColor;
     fill: none;
-    stroke-width: 1.4;
+    stroke-width: 1.3;
     stroke-linecap: round;
     stroke-linejoin: round;
-    opacity: .55;
-  }
-  .summary .kpi-tag {
-    font-size: 9.5px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
   }
   .summary .num {
     font-family: 'Cormorant Garamond', serif;
@@ -334,97 +340,63 @@
     font-weight: 500;
     line-height: 1;
     color: var(--ink);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-feature-settings: 'lnum';
     letter-spacing: -0.02em;
-  }
-  .summary .num small {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: var(--ink-mute);
-    font-weight: 500;
-    letter-spacing: 0;
-    margin-left: 4px;
   }
   .summary .num.warn { color: var(--vacancy); }
   .summary .num.teal { color: var(--teal); }
   .summary .lbl {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.11em;
-    color: var(--ink-soft);
-    font-weight: 600;
-  }
-  .summary .sub-lbl {
-    margin-top: 4px;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--ink-mute);
     font-weight: 400;
-    letter-spacing: 0;
-    text-transform: none;
+    line-height: 1.35;
   }
 
   /* === ВКЛАДКИ === */
   .tabs {
     display: flex;
-    gap: 4px;
-    margin-bottom: 36px;
+    gap: 28px;
+    margin-bottom: 24px;
     border-bottom: 1px solid var(--line);
     align-items: flex-end;
     position: relative;
-  }
-  .tabs-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    padding: 0 16px 18px 0;
-    border-right: 1px solid var(--line-soft);
-    margin-right: 8px;
-    align-self: flex-end;
+    flex-wrap: wrap;
   }
   .tab {
-    padding: 14px 24px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
+    padding: 12px 4px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
     font-weight: 500;
     color: var(--ink-mute);
     background: transparent;
     border: none;
     border-bottom: 2px solid transparent;
     cursor: pointer;
-    transition: color .15s ease, border-color .15s ease, background .15s ease;
+    transition: color .15s ease, border-color .15s ease;
     margin-bottom: -1px;
-    letter-spacing: -0.005em;
-    display: flex;
+    letter-spacing: 0;
+    display: inline-flex;
     align-items: center;
     gap: 10px;
-    border-radius: 2px 2px 0 0;
   }
-  .tab:hover { color: var(--ink); background: rgba(110,31,31,.03); }
+  .tab:hover { color: var(--ink); }
   .tab.active {
     color: var(--accent);
     border-bottom-color: var(--accent);
-    background: var(--accent-bg);
+    font-weight: 600;
   }
   .tab svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     stroke: currentColor;
     fill: none;
     stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: .8;
   }
-  .tab .tab-count {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-mute);
-    margin-left: 4px;
-    letter-spacing: 0;
-    font-feature-settings: 'tnum';
-  }
-  .tab.active .tab-count { color: var(--accent-soft); }
+  .tab.active svg { opacity: 1; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
@@ -460,31 +432,35 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-    margin-bottom: 36px;
+    margin-bottom: 28px;
+  }
+  .search-row {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
   }
   .search {
-    width: 100%;
+    flex: 1;
     position: relative;
   }
   .search input {
     width: 100%;
-    padding: 18px 56px 18px 52px;
+    padding: 16px 18px 16px 50px;
     font-family: inherit;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 14.5px;
+    font-weight: 400;
     border: 1px solid var(--line);
     background: var(--bg-paper);
     color: var(--ink);
     border-radius: 3px;
     outline: none;
     transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
-    letter-spacing: -0.005em;
+    letter-spacing: 0;
     box-shadow: var(--shadow-card);
   }
   .search input::placeholder {
     color: var(--ink-mute);
     font-weight: 400;
-    letter-spacing: 0;
   }
   .search input:focus {
     border-color: var(--accent);
@@ -494,71 +470,87 @@
   .search::before {
     content: '';
     position: absolute;
-    left: 20px;
+    left: 18px;
     top: 50%;
     width: 18px;
     height: 18px;
     transform: translateY(-50%);
-    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236e1f1f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>");
-    pointer-events: none;
-    opacity: .85;
-  }
-  .search-hint {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
+    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b6f7a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>");
     pointer-events: none;
   }
-  .filter-row {
-    display: flex;
-    gap: 14px;
+  .filter-toggle {
+    width: 52px;
+    flex-shrink: 0;
+    border: 1px solid var(--line);
+    background: var(--bg-paper);
+    color: var(--ink-soft);
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: center;
+    transition: all .15s ease;
+    box-shadow: var(--shadow-card);
   }
-  .filter-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-right: 4px;
+  .filter-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .filter-toggle svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
   .filter-chips {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     flex-wrap: wrap;
-    flex: 1;
+    align-items: center;
+  }
+  .filter-chips.topics { gap: 6px; }
+  .filter-chips-sep {
+    width: 1px;
+    height: 18px;
+    background: var(--line);
+    margin: 0 4px;
   }
   .chip {
-    padding: 8px 14px;
-    font-size: 12px;
+    padding: 9px 16px;
+    font-size: 12.5px;
     font-weight: 500;
     border: 1px solid var(--line);
     background: var(--bg-paper);
     color: var(--ink-soft);
-    border-radius: 2px;
+    border-radius: 3px;
     cursor: pointer;
     font-family: inherit;
     transition: all .12s ease;
     white-space: nowrap;
-    letter-spacing: 0.005em;
+    letter-spacing: 0;
   }
   .chip:hover { border-color: var(--ink-mute); color: var(--ink); }
   .chip.active {
-    background: var(--ink);
+    background: var(--accent);
     color: var(--bg-paper);
-    border-color: var(--ink);
-    box-shadow: 0 1px 2px rgba(26,29,36,.15);
+    border-color: var(--accent);
+    box-shadow: 0 1px 2px rgba(110,31,31,.18);
   }
   .chip[data-filter="vacancy"].active { background: var(--vacancy); border-color: var(--vacancy); }
   .chip[data-filter="sub"].active { background: var(--teal); border-color: var(--teal); }
   .chip[data-filter="leads"].active { background: var(--accent); border-color: var(--accent); }
+  .chip.topic {
+    padding: 7px 12px;
+    font-size: 12px;
+    color: var(--ink-mute);
+    background: transparent;
+  }
+  .chip.topic:hover { color: var(--ink); border-color: var(--ink-mute); }
+  .chip.topic.active {
+    background: var(--ink);
+    color: var(--bg-paper);
+    border-color: var(--ink);
+  }
 
   /* === УПРАВЛЕНИЯ === */
   .division {
@@ -619,30 +611,147 @@
     max-width: 800px;
   }
   .division-stats {
-    text-align: right;
-    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 10.5px;
     color: var(--ink-mute);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-    line-height: 1.8;
+    letter-spacing: 0.14em;
+    font-weight: 600;
+    line-height: 1;
     white-space: nowrap;
+    padding-top: 6px;
   }
-  .division-stats span { color: var(--ink); font-weight: 600; }
+  .division-stats span { color: var(--ink); font-weight: 700; margin-left: 4px; }
+  .division-toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--bg-paper);
+    color: var(--ink-mute);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s ease;
+  }
+  .division-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .division-toggle svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform .2s ease;
+  }
+  .division.collapsed .division-toggle svg { transform: rotate(180deg); }
+  .division.collapsed .roster,
+  .division.collapsed .subdept-head { display: none; }
+
+  /* Шапка для секций юрлиц */
+  .subco-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: rgba(45,90,94,.05);
+    border-bottom: 1px solid rgba(45,90,94,.15);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+  .subco-head svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 
   /* === КАРТОЧКИ СОТРУДНИКОВ === */
   .roster { display: grid; grid-template-columns: 1fr; }
   .person {
     display: grid;
-    grid-template-columns: 280px 1fr 220px;
-    gap: 28px;
-    padding: 18px 36px;
+    grid-template-columns: 56px minmax(220px, 1.4fr) 1fr 180px auto;
+    gap: 18px;
+    padding: 18px 28px 18px 24px;
     border-bottom: 1px solid var(--line-soft);
     transition: background .12s ease;
-    align-items: start;
+    align-items: center;
   }
   .person:last-child { border-bottom: none; }
   .person:hover { background: rgba(168,137,94,.04); }
+
+  .person-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    background: var(--accent);
+    color: var(--bg-paper);
+    flex-shrink: 0;
+    user-select: none;
+  }
+  .person-avatar.teal { background: var(--teal); }
+  .person-avatar.gold { background: var(--gold); }
+  .person-avatar.vacancy {
+    background: transparent;
+    color: var(--vacancy);
+    border: 1px dashed var(--vacancy);
+  }
+  .person-identity { min-width: 0; }
+  .person-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    justify-self: end;
+  }
+  .person-action {
+    width: 36px;
+    height: 36px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--bg-paper);
+    color: var(--ink-soft);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s ease;
+    text-decoration: none;
+  }
+  .person-action:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--bg-elev);
+  }
+  .person-action svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .person-action.disabled {
+    opacity: .35;
+    pointer-events: none;
+  }
 
   .person-name {
     font-family: 'Cormorant Garamond', serif;
@@ -651,6 +760,10 @@
     color: var(--ink);
     letter-spacing: -0.005em;
     line-height: 1.25;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
   }
   .person-name.vacancy { color: var(--vacancy); font-style: italic; }
 
@@ -713,23 +826,27 @@
 
   .person-phone {
     text-align: right;
-    padding-top: 4px;
+    padding-top: 0;
+    font-feature-settings: 'tnum';
   }
   .person-phone .ext {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 11.5px;
     color: var(--ink-mute);
-    margin-bottom: 3px;
     font-feature-settings: 'tnum';
     letter-spacing: 0.02em;
+    order: 2;
+    display: block;
+    margin-top: 2px;
   }
   .person-phone .mob {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
+    font-size: 13px;
     color: var(--ink);
     font-feature-settings: 'tnum';
-    line-height: 1.5;
+    line-height: 1.4;
     white-space: nowrap;
+    font-weight: 500;
   }
   .person-phone .mob a {
     color: inherit;
@@ -1013,38 +1130,57 @@
   }
   .modal-body { max-height: 70vh; overflow-y: auto; }
   .modal-body .person {
-    padding: 18px 36px;
-    grid-template-columns: 220px 1fr 180px;
-    gap: 20px;
+    padding: 16px 28px;
+    grid-template-columns: 52px minmax(180px, 1fr) 1fr 160px auto;
+    gap: 16px;
   }
   .modal-body .person:hover { background: rgba(168,137,94,.05); }
 
   /* === ПОДВАЛ === */
   footer {
-    margin-top: 64px;
-    padding-top: 32px;
+    margin-top: 56px;
+    padding-top: 28px;
     border-top: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 24px;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--ink-mute);
-    letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1.6;
   }
-  footer .legend {
+  .footer-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+  .footer-line svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .footer-legend {
     display: flex;
-    gap: 24px;
+    gap: 18px;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
   }
-  footer .legend span {
-    display: flex;
+  .footer-legend span {
+    display: inline-flex;
     align-items: center;
     gap: 6px;
   }
-  footer .dot {
-    width: 8px;
-    height: 8px;
+  .footer-legend .dot {
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     display: inline-block;
   }
@@ -1290,8 +1426,16 @@
   @media (max-width: 1100px) {
     .org-companies-grid { grid-template-columns: repeat(3, 1fr); }
     .summary { grid-template-columns: repeat(2, 1fr); }
-    .summary > div:nth-child(2) { border-right: none; }
-    .summary > div:nth-child(1), .summary > div:nth-child(2) { border-bottom: 1px solid var(--line-soft); }
+    .summary > div:nth-child(3) { border-left: none; }
+    .summary > div:nth-child(1), .summary > div:nth-child(2) {
+      border-bottom: 1px solid var(--line-soft);
+      padding-bottom: 18px;
+    }
+    .summary > div:nth-child(3), .summary > div:nth-child(4) {
+      padding-top: 18px;
+    }
+    .person { grid-template-columns: 48px 1fr 160px auto; }
+    .person-role { display: none; }
   }
   @media (max-width: 900px) {
     .wrap { padding: 24px 18px 64px; }
@@ -1306,53 +1450,65 @@
       margin-bottom: 32px;
       gap: 24px;
     }
-    .brand { gap: 18px; align-items: flex-start; }
-    .brand-logo-wrap { width: 64px; height: 64px; padding: 6px; }
+    .brand { gap: 18px; align-items: center; }
+    .brand-logo-wrap { width: 84px; height: 84px; }
     h1 { font-size: clamp(26px, 7vw, 36px); }
     .subtitle { font-size: 13px; gap: 10px; margin-top: 10px; }
     .subtitle::before { width: 18px; }
-    .meta { text-align: left; }
-    .meta-card { width: 100%; min-width: 0; text-align: left; }
-    .meta-card .meta-row { justify-content: flex-start; }
-    .summary > div { padding: 18px 18px 16px; }
-    .summary .num { font-size: 36px; }
-    .division-head { grid-template-columns: 1fr; padding: 22px 22px 18px; }
+    .meta { align-items: flex-start; text-align: left; }
+    .meta-block { text-align: left; }
+    .summary { padding: 16px 0; }
+    .summary > div { padding: 4px 16px 4px 0; gap: 12px; }
+    .summary > div + div { padding-left: 16px; }
+    .summary .num { font-size: 34px; }
+    .summary .kpi-icon { width: 28px; height: 28px; }
+    .summary .kpi-icon svg { width: 22px; height: 22px; }
+    .division-head { grid-template-columns: 1fr; padding: 22px 22px 18px; gap: 12px; }
     .division::before { height: 44px; }
-    .division-stats { text-align: left; }
+    .division-stats { padding-top: 0; }
     .person {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      padding: 20px 22px;
+      grid-template-columns: 44px 1fr auto;
+      gap: 12px;
+      padding: 16px 18px;
     }
-    .person-phone { text-align: left; }
-    footer { grid-template-columns: 1fr; }
-    .tabs { gap: 0; overflow-x: auto; flex-wrap: nowrap; }
-    .tabs-label { display: none; }
-    .tab { padding: 12px 16px; font-size: 16px; flex-shrink: 0; }
-    .tab span.tab-text { display: none; }
-    .tab svg { width: 18px; height: 18px; }
-    .tab.active span.tab-text { display: inline; }
-    .tab .tab-count { display: none; }
+    .person-role,
+    .person-phone { grid-column: 2 / -1; text-align: left; padding-left: 0; }
+    .person-actions { grid-column: 3; grid-row: 1; align-self: start; }
+    .tabs { gap: 18px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+    .tab { font-size: 14px; flex-shrink: 0; }
+    .tab svg { width: 16px; height: 16px; }
     .search input { padding: 14px 18px 14px 46px; font-size: 14px; }
     .search::before { left: 16px; width: 16px; height: 16px; }
-    .search-hint { display: none; }
-    .filter-row { gap: 8px; }
-    .filter-label { width: 100%; margin-bottom: 2px; }
+    .filter-toggle { width: 46px; }
+    .filter-chips { gap: 6px; }
+    .chip { padding: 7px 12px; font-size: 12px; }
     .org-chart { padding: 32px 8px; }
     .org-companies-grid { grid-template-columns: repeat(2, 1fr); }
     .modal { margin: 0; }
     .modal-head { padding: 20px 24px; }
     .modal-body .person {
-      grid-template-columns: 1fr;
-      padding: 16px 24px;
+      grid-template-columns: 44px 1fr auto;
+      padding: 14px 22px;
     }
     .section-title { flex-direction: column; align-items: flex-start; gap: 8px; }
     .section-title h2 { font-size: 24px; }
+    .subco-head { padding: 12px 22px; font-size: 9.5px; letter-spacing: 0.14em; }
   }
   @media (max-width: 540px) {
-    .summary { grid-template-columns: 1fr; }
-    .summary > div { border-right: none; border-bottom: 1px solid var(--line-soft); }
+    .summary { grid-template-columns: 1fr; padding: 8px 0; }
+    .summary > div {
+      border-left: none !important;
+      border-bottom: 1px solid var(--line-soft);
+      padding: 14px 0 !important;
+    }
     .summary > div:last-child { border-bottom: none; }
+    .person { grid-template-columns: 40px 1fr; gap: 10px; padding: 14px 16px; }
+    .person-actions {
+      grid-column: 2;
+      grid-row: auto;
+      justify-self: start;
+      margin-top: 4px;
+    }
   }
 
   @media print {
@@ -1370,88 +1526,71 @@
 <body>
 <div class="wrap">
 
-  <div class="topbar" role="navigation" aria-label="Брендовая полоса">
-    <div class="topbar-left">
-      <span class="topbar-mark">ПА · НТК</span>
-      <span class="topbar-sep" aria-hidden="true"></span>
-      <span class="chain-tag" title="Железнодорожные перевозки">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="13" rx="2"/><path d="M5 11h14"/><circle cx="9" cy="20" r="1.4"/><circle cx="15" cy="20" r="1.4"/><path d="M7 17l-2 3M17 17l2 3"/></svg>
-        <span>ЖД · НТК</span>
-      </span>
-      <span class="chain-arrow" aria-hidden="true">—</span>
-      <span class="chain-tag" title="Морские порты">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6" r="2"/><path d="M12 8v13M8 12h8M5 17a7 7 0 0 0 14 0"/></svg>
-        <span>Порты · ПА</span>
-      </span>
-    </div>
-    <div class="topbar-right">
-      Внутренний документ · версия<b>28.04.2026</b>
-    </div>
-  </div>
-
   <header class="top">
     <div class="brand">
       <div class="brand-logo-wrap">
         <img src="logo_ntc-pa.png" alt="Портовый Альянс / НТК" class="brand-logo">
       </div>
       <div class="brand-text">
-        <div class="eyebrow">Корпоративный реестр · юридическая служба</div>
-        <h1>Портовый&nbsp;Альянс<span class="slash">/</span><em>НТК</em></h1>
-        <div class="subtitle">Юридическая служба холдинга <span class="sub-mute">· структура и контакты</span></div>
+        <h1>Портовый Альянс <span class="slash">/</span> <em>НТК</em></h1>
+        <div class="subtitle">Юридическая служба холдинга</div>
       </div>
     </div>
     <div class="meta">
+      <span class="variant-badge">Вариант&nbsp;<b>B</b></span>
       <div class="meta-actions">
         <button class="btn-fot" id="btnFot" type="button" aria-label="Открыть финансовые данные">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           <span>ФОТ</span>
         </button>
       </div>
-      <div class="meta-card">
-        <span class="meta-label">Внутренний документ</span>
-        <strong>Справочник ЮД ПА/НТК</strong>
-        <div class="meta-row">Актуально на<b>28.04.2026</b></div>
-        <div class="meta-row">Источник<b>ЮД ПА/НТК</b></div>
+      <div class="meta-block">
+        <div class="meta-headline">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Внутренний документ
+        </div>
+        <div class="meta-line">По состоянию на <b>28.04.2026</b></div>
+        <div class="meta-line meta-source">Источник: справочник ЮД ПА/НТК</div>
       </div>
     </div>
   </header>
 
   <section class="summary" aria-label="Сводка по службе">
     <div>
-      <div class="kpi-head">
-        <span class="kpi-tag">01</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="kpi-text">
+        <div class="num">64</div>
+        <div class="lbl">всего сотрудников</div>
       </div>
-      <div class="num">64</div>
-      <div class="lbl">Всего сотрудников</div>
-      <div class="sub-lbl">по холдингу</div>
+      <div class="kpi-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+      </div>
     </div>
     <div>
-      <div class="kpi-head">
-        <span class="kpi-tag">02</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="kpi-text">
+        <div class="num">5</div>
+        <div class="lbl">подразделений ЮД ПА</div>
       </div>
-      <div class="num">5</div>
-      <div class="lbl">Подразделений ЮД ПА</div>
-      <div class="sub-lbl">центральный офис</div>
+      <div class="kpi-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2M13 10h2M9 14h2M13 14h2M9 18h2M13 18h2"/></svg>
+      </div>
     </div>
     <div>
-      <div class="kpi-head">
-        <span class="kpi-tag">03</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M3 10l9-7 9 7M5 21V10M19 21V10M9 14h2M13 14h2M9 18h2M13 18h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="kpi-text">
+        <div class="num teal">12</div>
+        <div class="lbl">юридических лиц холдинга</div>
       </div>
-      <div class="num teal">12</div>
-      <div class="lbl">Юрлиц холдинга</div>
-      <div class="sub-lbl">ПА · НТК · дочерние</div>
+      <div class="kpi-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
+      </div>
     </div>
     <div>
-      <div class="kpi-head">
-        <span class="kpi-tag">04</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <div class="kpi-text">
+        <div class="num warn">10</div>
+        <div class="lbl">вакансий</div>
       </div>
-      <div class="num warn">10</div>
-      <div class="lbl">Открытых вакансий</div>
-      <div class="sub-lbl">в работе подбор</div>
+      <div class="kpi-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </div>
     </div>
   </section>
 
@@ -1490,16 +1629,21 @@
   </div>
 
   <div class="tabs" role="tablist">
-    <span class="tabs-label" aria-hidden="true">Раздел</span>
-    <button class="tab active" data-tab="chart" role="tab">
+    <button class="tab" data-tab="chart" role="tab">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       <span class="tab-text">Структура</span>
-      <span class="tab-count">17</span>
     </button>
-    <button class="tab" data-tab="list" role="tab">
+    <button class="tab active" data-tab="list" role="tab" data-preset="all">
       <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
       <span class="tab-text">Список</span>
-      <span class="tab-count">64</span>
+    </button>
+    <button class="tab" data-tab="list" role="tab" data-preset="leads">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 19c.5-3 3-5 6-5s5.5 2 6 5"/><path d="M16 11l2 2 4-4"/></svg>
+      <span class="tab-text">Руководители</span>
+    </button>
+    <button class="tab" data-tab="list" role="tab" data-preset="vacancy">
+      <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span class="tab-text">Вакансии</span>
     </button>
   </div>
 
@@ -1728,19 +1872,25 @@
   <div class="tab-panel" id="panel-list">
 
   <div class="toolbar">
-    <div class="search">
-      <input type="search" id="searchInput" placeholder="Поиск по ФИО, должности, функционалу, компании или телефону…" autocomplete="off">
-      <span class="search-hint" aria-hidden="true">по справочнику</span>
-    </div>
-    <div class="filter-row">
-      <span class="filter-label">Фильтр</span>
-      <div class="filter-chips" id="filterChips">
-        <button class="chip active" data-filter="all">Все</button>
-        <button class="chip" data-filter="hq">Москва · ЮД ПА</button>
-        <button class="chip" data-filter="sub">Юрлица холдинга</button>
-        <button class="chip" data-filter="leads">Руководители</button>
-        <button class="chip" data-filter="vacancy">Вакансии</button>
+    <div class="search-row">
+      <div class="search">
+        <input type="search" id="searchInput" placeholder="Найти юриста, направление, компанию, телефон или задачу" autocomplete="off">
       </div>
+      <button class="filter-toggle" type="button" id="filterToggle" aria-label="Дополнительные фильтры">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="7" x2="14" y2="7"/><line x1="18" y1="7" x2="20" y2="7"/><circle cx="16" cy="7" r="2"/><line x1="4" y1="17" x2="8" y2="17"/><line x1="12" y1="17" x2="20" y2="17"/><circle cx="10" cy="17" r="2"/></svg>
+      </button>
+    </div>
+    <div class="filter-chips" id="filterChips">
+      <button class="chip active" data-filter="all">Все</button>
+      <button class="chip" data-filter="hq">Москва · ЮД ПА</button>
+      <button class="chip" data-filter="sub">Юрлица холдинга</button>
+      <button class="chip" data-filter="leads">Руководители</button>
+      <button class="chip" data-filter="vacancy">Вакансии</button>
+      <span class="filter-chips-sep" aria-hidden="true"></span>
+      <button class="chip topic" data-topic="договор">договоры</button>
+      <button class="chip topic" data-topic="суд">суды</button>
+      <button class="chip topic" data-topic="строй">стройка</button>
+      <button class="chip topic" data-topic="ехсз">ЕХСЗ-2</button>
     </div>
   </div>
 
@@ -3283,22 +3433,119 @@
   </div>
 
   <footer>
-    <div class="legend">
+    <div class="footer-line">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/></svg>
+      <span>Данные актуальны на <b>28.04.2026</b>. Используйте внутреннюю информацию ответственно.</span>
+    </div>
+    <div class="footer-legend" aria-hidden="true">
       <span><span class="dot" style="background:var(--accent)"></span>Руководящие позиции</span>
-      <span><span class="dot" style="background:var(--gold)"></span>Заместители / руководители направлений</span>
+      <span><span class="dot" style="background:var(--gold)"></span>Заместители / направления</span>
       <span><span class="dot" style="background:var(--teal)"></span>Юрлица холдинга</span>
       <span><span class="dot" style="background:var(--vacancy)"></span>Вакансии</span>
     </div>
-    <div>Документ для внутреннего использования · ЮД ПА/НТК</div>
   </footer>
 
 </div>
 
 <script>
+  // === Инъекция аватаров, кнопок и сворачивания ===
+  (function decorateRoster() {
+    function initialsOf(name) {
+      if (!name) return '';
+      if (/вакансия/i.test(name)) return '';
+      const parts = name.trim().split(/\s+/).filter(Boolean);
+      const a = parts[0] && parts[0][0] ? parts[0][0] : '';
+      const b = parts[1] && parts[1][0] ? parts[1][0] : '';
+      return (a + b).toUpperCase();
+    }
+
+    document.querySelectorAll('.person').forEach((p) => {
+      if (p.querySelector('.person-avatar')) return;
+      const isSub = !!p.closest('.division.subsidiary');
+      const isGoldDir = !!p.closest('#div-projects-lead, #div-direction');
+      const tags = (p.dataset.tags || '').split(' ');
+      const isVacancy = tags.includes('vacancy');
+      const nameEl = p.querySelector('.person-name');
+      const name = nameEl ? nameEl.textContent.trim() : '';
+
+      let avatarClass = 'person-avatar';
+      if (isVacancy) avatarClass += ' vacancy';
+      else if (isSub) avatarClass += ' teal';
+      else if (isGoldDir) avatarClass += ''; // accent default for HQ leads
+
+      const avatar = document.createElement('div');
+      avatar.className = avatarClass;
+      if (isVacancy) {
+        avatar.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c.7-3.2 3.5-5.5 7-5.5s6.3 2.3 7 5.5"/></svg>';
+      } else {
+        avatar.textContent = initialsOf(name);
+      }
+
+      const firstChild = p.firstElementChild;
+      if (firstChild && !firstChild.classList.contains('person-identity')) {
+        const wrap = document.createElement('div');
+        wrap.className = 'person-identity';
+        p.insertBefore(wrap, firstChild);
+        wrap.appendChild(firstChild);
+      }
+      p.insertBefore(avatar, p.firstElementChild);
+
+      const mob = p.querySelector('.person-phone .mob a');
+      const tel = mob ? mob.getAttribute('href') : '';
+      const actions = document.createElement('div');
+      actions.className = 'person-actions';
+      const phoneBtn = tel
+        ? `<a class="person-action" href="${tel}" aria-label="Позвонить" title="Позвонить"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>`
+        : `<button class="person-action disabled" type="button" aria-label="Телефон не указан" title="Телефон не указан"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></button>`;
+      const mailBtn = `<button class="person-action disabled" type="button" aria-label="Почта недоступна" title="Внутренняя почта недоступна"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></button>`;
+      actions.innerHTML = phoneBtn + mailBtn;
+      const payroll = p.querySelector('.payroll-locked');
+      if (payroll) {
+        p.insertBefore(actions, payroll);
+      } else {
+        p.appendChild(actions);
+      }
+    });
+
+    document.querySelectorAll('.division').forEach((div) => {
+      const stats = div.querySelector('.division-head .division-stats');
+      if (!stats || stats.querySelector('.division-toggle')) return;
+      const sotrMatch = stats.textContent.match(/Сотрудников:\s*(\d+)/i);
+      const vacMatch = stats.textContent.match(/Вакансий:\s*(\d+)/i);
+      const sotr = sotrMatch ? sotrMatch[1] : '';
+      const vac = vacMatch ? vacMatch[1] : '';
+      let html = '';
+      if (sotr) html += `Сотрудников: <span>${sotr}</span>`;
+      if (vac) html += (html ? ' · ' : '') + `Вакансий: <span>${vac}</span>`;
+      stats.innerHTML = html || stats.innerHTML;
+
+      const toggle = document.createElement('button');
+      toggle.className = 'division-toggle';
+      toggle.type = 'button';
+      toggle.setAttribute('aria-label', 'Свернуть');
+      toggle.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        div.classList.toggle('collapsed');
+      });
+      stats.appendChild(toggle);
+    });
+
+    document.querySelectorAll('.division.subsidiary').forEach((div) => {
+      const head = div.querySelector('.division-head');
+      if (!head || head.previousElementSibling?.classList?.contains('subco-head')) return;
+      const tag = document.createElement('div');
+      tag.className = 'subco-head';
+      tag.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>Юридическое сопровождение юрлица холдинга</span>';
+      div.insertBefore(tag, head);
+    });
+  })();
+
   // === Поиск ===
   const searchInput = document.getElementById('searchInput');
   const emptyState = document.getElementById('emptyState');
   let activeFilter = 'all';
+  let activeTopic = '';
 
   function applyFilters() {
     const q = searchInput.value.trim().toLowerCase();
@@ -3337,7 +3584,13 @@
         if (activeFilter === 'leads') matchFilter = tags.includes('lead') || tags.includes('deputy');
         else if (activeFilter === 'vacancy') matchFilter = tags.includes('vacancy');
 
-        const visible = matchSearch && matchFilter;
+        let matchTopic = true;
+        if (activeTopic) {
+          const haystack = (text + ' ' + divisionText).toLowerCase();
+          matchTopic = haystack.includes(activeTopic);
+        }
+
+        const visible = matchSearch && matchFilter && matchTopic;
         p.style.display = visible ? '' : 'none';
         if (visible) { divHasVisible = true; totalVisible++; }
       });
@@ -3350,29 +3603,56 @@
 
   searchInput.addEventListener('input', applyFilters);
 
-  document.querySelectorAll('#filterChips .chip').forEach(chip => {
+  document.querySelectorAll('#filterChips .chip:not(.topic)').forEach(chip => {
     chip.addEventListener('click', () => {
-      document.querySelectorAll('#filterChips .chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('#filterChips .chip:not(.topic)').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       activeFilter = chip.dataset.filter;
       applyFilters();
     });
   });
 
-  // === Переключение вкладок ===
-  function activateTab(name) {
-    document.querySelectorAll('.tab').forEach(t => {
-      t.classList.toggle('active', t.dataset.tab === name);
+  document.querySelectorAll('#filterChips .chip.topic').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const next = chip.dataset.topic;
+      const wasActive = chip.classList.contains('active');
+      document.querySelectorAll('#filterChips .chip.topic').forEach(c => c.classList.remove('active'));
+      if (!wasActive) {
+        chip.classList.add('active');
+        activeTopic = next.toLowerCase();
+      } else {
+        activeTopic = '';
+      }
+      applyFilters();
     });
+  });
+
+  function setFilterByName(name) {
+    document.querySelectorAll('#filterChips .chip:not(.topic)').forEach(c => {
+      c.classList.toggle('active', c.dataset.filter === name);
+    });
+    activeFilter = name;
+    applyFilters();
+  }
+
+  // === Переключение вкладок ===
+  function activateTab(tabEl) {
+    const name = tabEl.dataset.tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
     document.querySelectorAll('.tab-panel').forEach(p => {
       p.classList.toggle('active', p.id === 'panel-' + name);
     });
+    if (tabEl.dataset.preset) {
+      setFilterByName(tabEl.dataset.preset);
+    }
   }
   document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => activateTab(tab.dataset.tab));
+    tab.addEventListener('click', () => activateTab(tab));
   });
   const isMobile = window.matchMedia('(max-width: 900px)').matches;
-  activateTab(isMobile ? 'list' : 'chart');
+  const initialTab = document.querySelector(isMobile ? '.tab[data-tab="list"][data-preset="all"]' : '.tab[data-tab="chart"]');
+  if (initialTab) activateTab(initialTab);
 
   // === Модальное окно ===
   const modal = document.getElementById('modal');
