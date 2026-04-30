@@ -1,20 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <rect width="512" height="512" fill="#6e1f1f"/>
 
-  <g fill="none" stroke="#f5f2ec" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="256" y1="172" x2="256" y2="360"/>
-    <line x1="148" y1="212" x2="364" y2="212"/>
-    <line x1="200" y1="360" x2="312" y2="360"/>
-    <line x1="226" y1="328" x2="286" y2="328"/>
-    <line x1="226" y1="328" x2="200" y2="360"/>
-    <line x1="286" y1="328" x2="312" y2="360"/>
+  <!-- Верх: рельсы (НТК) -->
+  <g stroke="#f5f2ec" fill="none" stroke-linecap="round">
+    <line x1="148" y1="184" x2="364" y2="184" stroke-width="14"/>
+    <line x1="148" y1="222" x2="364" y2="222" stroke-width="14"/>
+    <line x1="180" y1="170" x2="180" y2="236" stroke-width="6"/>
+    <line x1="232" y1="170" x2="232" y2="236" stroke-width="6"/>
+    <line x1="280" y1="170" x2="280" y2="236" stroke-width="6"/>
+    <line x1="332" y1="170" x2="332" y2="236" stroke-width="6"/>
   </g>
 
-  <circle cx="256" cy="172" r="14" fill="#a8895e"/>
+  <!-- Поток -->
+  <line x1="256" y1="240" x2="256" y2="284" stroke="#a8895e" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 7"/>
 
-  <line x1="148" y1="212" x2="148" y2="252" stroke="#f5f2ec" stroke-width="7" stroke-linecap="round"/>
-  <line x1="364" y1="212" x2="364" y2="252" stroke="#f5f2ec" stroke-width="7" stroke-linecap="round"/>
-
-  <path d="M 104 252 Q 148 302 192 252 Z" fill="#a8895e"/>
-  <path d="M 320 252 Q 364 302 408 252 Z" fill="#f5f2ec"/>
+  <!-- Низ: якорь (ПА) -->
+  <g fill="none" stroke="#f5f2ec" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="256" cy="298" r="14" fill="#a8895e" stroke-width="4"/>
+    <line x1="256" y1="312" x2="256" y2="392"/>
+    <line x1="216" y1="340" x2="296" y2="340"/>
+    <path d="M 184 358 Q 184 392 256 392 Q 328 392 328 358"/>
+  </g>
 </svg>
