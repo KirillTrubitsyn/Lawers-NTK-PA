@@ -12,24 +12,31 @@
 <meta name="apple-mobile-web-app-title" content="Юр. служба ПА/НТК">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="apple-touch-icon" href="icon.svg">
+<link rel="preload" as="image" href="logo_ntc-pa.png" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f2ec;
+    --bg: #f3efe6;
     --bg-paper: #faf7f1;
-    --ink: #1a1d24;
-    --ink-soft: #3a3f4b;
+    --bg-elev: #ffffff;
+    --ink: #15171d;
+    --ink-soft: #353944;
     --ink-mute: #6b6f7a;
+    --ink-faint: #9c9e9f;
     --line: #d8d2c4;
     --line-soft: #e6e1d4;
+    --line-strong: #c2bca8;
     --accent: #6e1f1f;
     --accent-soft: #8a3535;
+    --accent-bg: rgba(110,31,31,.06);
     --gold: #a8895e;
     --vacancy: #b8704a;
     --teal: #2d5a5e;
+    --shadow-sm: 0 1px 0 rgba(26,29,36,.04);
     --shadow: 0 1px 0 rgba(26,29,36,.04), 0 12px 40px -20px rgba(26,29,36,.18);
+    --shadow-card: 0 1px 0 rgba(26,29,36,.05), 0 1px 2px rgba(26,29,36,.03);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,8 +51,9 @@
     font-weight: 400;
     letter-spacing: -0.005em;
     background-image:
-      radial-gradient(circle at 15% 0%, rgba(110,31,31,.04) 0%, transparent 40%),
-      radial-gradient(circle at 85% 100%, rgba(168,137,94,.05) 0%, transparent 50%);
+      radial-gradient(ellipse 60% 40% at 12% -10%, rgba(110,31,31,.05) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 35% at 88% 105%, rgba(45,90,94,.04) 0%, transparent 60%),
+      radial-gradient(circle at 50% 50%, rgba(168,137,94,.025) 0%, transparent 70%);
     background-attachment: fixed;
     min-height: 100vh;
   }
@@ -53,23 +61,128 @@
   .wrap {
     max-width: 1320px;
     margin: 0 auto;
-    padding: 56px 48px 96px;
+    padding: 40px 48px 96px;
+  }
+
+  /* === НАВИГАЦИОННАЯ ПОЛОСА === */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink-mute);
+  }
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .topbar-mark {
+    color: var(--accent);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-weight: 600;
+  }
+  .topbar-sep {
+    width: 1px;
+    height: 14px;
+    background: var(--line);
+  }
+  .chain-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-mute);
+  }
+  .chain-tag svg {
+    width: 13px;
+    height: 13px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .chain-arrow {
+    color: var(--ink-faint);
+    letter-spacing: 0;
+    margin: 0 -2px;
+  }
+  .topbar-right {
+    font-feature-settings: 'tnum';
+    color: var(--ink-mute);
+    white-space: nowrap;
+  }
+  .topbar-right b {
+    color: var(--ink);
+    font-weight: 700;
+    margin-left: 8px;
   }
 
   /* === ШАПКА === */
   header.top {
     border-bottom: 1px solid var(--line);
-    padding-bottom: 36px;
-    margin-bottom: 44px;
+    padding-bottom: 40px;
+    margin-bottom: 48px;
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 32px;
+    gap: 40px;
     align-items: end;
+    position: relative;
   }
+  header.top::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 96px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    min-width: 0;
+  }
+  .brand-logo-wrap {
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: var(--shadow-card);
+  }
+  .brand-logo {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+  }
+  .brand-text { min-width: 0; }
+
   .eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 14px;
@@ -87,12 +200,42 @@
   h1 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
-    font-size: clamp(36px, 5vw, 54px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-size: clamp(34px, 4.4vw, 54px);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
     color: var(--ink);
   }
+  h1 .slash {
+    color: var(--gold);
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 4px;
+  }
   h1 em { font-style: italic; color: var(--accent); font-weight: 500; }
+
+  .subtitle {
+    margin-top: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.005em;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .subtitle::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .subtitle .sub-mute {
+    color: var(--ink-mute);
+    font-weight: 400;
+  }
+
   .meta {
     text-align: right;
     font-size: 12px;
@@ -100,12 +243,45 @@
     font-feature-settings: 'tnum';
     line-height: 1.7;
   }
-  .meta strong {
+  .meta-card {
+    display: inline-block;
+    text-align: right;
+    padding: 14px 18px;
+    background: var(--bg-paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    box-shadow: var(--shadow-card);
+    min-width: 220px;
+  }
+  .meta-card .meta-label {
+    display: block;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .meta-card strong {
     display: block;
     font-weight: 600;
     color: var(--ink);
     font-size: 13px;
     margin-bottom: 2px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .meta-card .meta-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    font-size: 11.5px;
+    color: var(--ink-mute);
+  }
+  .meta-card .meta-row + .meta-row { margin-top: 2px; }
+  .meta-card .meta-row b {
+    color: var(--ink);
+    font-weight: 600;
   }
 
   /* === СВОДКА === */
@@ -116,58 +292,122 @@
     margin-bottom: 48px;
     border: 1px solid var(--line);
     background: var(--bg-paper);
-    border-radius: 2px;
+    border-radius: 3px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
   }
   .summary > div {
-    padding: 22px 24px;
+    padding: 24px 26px 22px;
     border-right: 1px solid var(--line-soft);
+    position: relative;
+    transition: background .15s ease;
   }
+  .summary > div:hover { background: rgba(255,255,255,.6); }
   .summary > div:last-child { border-right: none; }
+  .summary .kpi-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    color: var(--ink-mute);
+  }
+  .summary .kpi-head svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: .55;
+  }
+  .summary .kpi-tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
   .summary .num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
+    font-size: 44px;
     font-weight: 500;
     line-height: 1;
     color: var(--ink);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     font-feature-settings: 'lnum';
+    letter-spacing: -0.02em;
+  }
+  .summary .num small {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink-mute);
+    font-weight: 500;
+    letter-spacing: 0;
+    margin-left: 4px;
   }
   .summary .num.warn { color: var(--vacancy); }
   .summary .num.teal { color: var(--teal); }
   .summary .lbl {
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.11em;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .summary .sub-lbl {
+    margin-top: 4px;
+    font-size: 11px;
     color: var(--ink-mute);
-    font-weight: 500;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   /* === ВКЛАДКИ === */
   .tabs {
     display: flex;
-    gap: 0;
+    gap: 4px;
     margin-bottom: 36px;
     border-bottom: 1px solid var(--line);
+    align-items: flex-end;
+    position: relative;
+  }
+  .tabs-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding: 0 16px 18px 0;
+    border-right: 1px solid var(--line-soft);
+    margin-right: 8px;
+    align-self: flex-end;
   }
   .tab {
-    padding: 14px 28px;
+    padding: 14px 24px;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 500;
     color: var(--ink-mute);
     background: transparent;
     border: none;
     border-bottom: 2px solid transparent;
     cursor: pointer;
-    transition: color .15s ease, border-color .15s ease;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
     margin-bottom: -1px;
     letter-spacing: -0.005em;
     display: flex;
     align-items: center;
     gap: 10px;
+    border-radius: 2px 2px 0 0;
   }
-  .tab:hover { color: var(--ink); }
-  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab:hover { color: var(--ink); background: rgba(110,31,31,.03); }
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    background: var(--accent-bg);
+  }
   .tab svg {
     width: 16px;
     height: 16px;
@@ -175,6 +415,16 @@
     fill: none;
     stroke-width: 1.5;
   }
+  .tab .tab-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-mute);
+    margin-left: 4px;
+    letter-spacing: 0;
+    font-feature-settings: 'tnum';
+  }
+  .tab.active .tab-count { color: var(--accent-soft); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
@@ -208,81 +458,131 @@
   /* === ПОИСК === */
   .toolbar {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 14px;
     margin-bottom: 36px;
-    flex-wrap: wrap;
-    align-items: center;
   }
   .search {
-    flex: 1;
-    min-width: 280px;
+    width: 100%;
     position: relative;
   }
   .search input {
     width: 100%;
-    padding: 13px 18px 13px 44px;
+    padding: 18px 56px 18px 52px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500;
     border: 1px solid var(--line);
     background: var(--bg-paper);
     color: var(--ink);
-    border-radius: 2px;
+    border-radius: 3px;
     outline: none;
-    transition: border-color .15s ease, box-shadow .15s ease;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    letter-spacing: -0.005em;
+    box-shadow: var(--shadow-card);
+  }
+  .search input::placeholder {
+    color: var(--ink-mute);
+    font-weight: 400;
+    letter-spacing: 0;
   }
   .search input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(110,31,31,.08);
+    background: var(--bg-elev);
+    box-shadow: 0 0 0 3px rgba(110,31,31,.1);
   }
   .search::before {
     content: '';
     position: absolute;
-    left: 16px;
+    left: 20px;
     top: 50%;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     transform: translateY(-50%);
-    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b6f7a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>");
+    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236e1f1f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>");
     pointer-events: none;
+    opacity: .85;
+  }
+  .search-hint {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    pointer-events: none;
+  }
+  .filter-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-right: 4px;
   }
   .filter-chips {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
+    flex: 1;
   }
   .chip {
     padding: 8px 14px;
     font-size: 12px;
     font-weight: 500;
     border: 1px solid var(--line);
-    background: transparent;
+    background: var(--bg-paper);
     color: var(--ink-soft);
     border-radius: 2px;
     cursor: pointer;
     font-family: inherit;
     transition: all .12s ease;
     white-space: nowrap;
+    letter-spacing: 0.005em;
   }
   .chip:hover { border-color: var(--ink-mute); color: var(--ink); }
   .chip.active {
     background: var(--ink);
     color: var(--bg-paper);
     border-color: var(--ink);
+    box-shadow: 0 1px 2px rgba(26,29,36,.15);
   }
+  .chip[data-filter="vacancy"].active { background: var(--vacancy); border-color: var(--vacancy); }
+  .chip[data-filter="sub"].active { background: var(--teal); border-color: var(--teal); }
+  .chip[data-filter="leads"].active { background: var(--accent); border-color: var(--accent); }
 
   /* === УПРАВЛЕНИЯ === */
   .division {
     margin-bottom: 28px;
     background: var(--bg-paper);
     border: 1px solid var(--line);
-    border-radius: 2px;
+    border-radius: 3px;
     overflow: hidden;
     box-shadow: var(--shadow);
+    position: relative;
   }
-  .division.subsidiary { border-left: 3px solid var(--teal); }
+  .division::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 56px;
+    background: var(--accent);
+  }
+  .division.subsidiary::before { background: var(--teal); }
 
   .division-head {
-    padding: 24px 36px 20px;
+    padding: 26px 36px 22px;
     border-bottom: 1px solid var(--line);
     background: linear-gradient(180deg, var(--bg-paper) 0%, rgba(245,242,236,.6) 100%);
     display: grid;
@@ -356,23 +656,32 @@
 
   .role-tag {
     display: inline-block;
-    margin-top: 6px;
+    margin-top: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 3px 8px;
-    background: var(--ink);
-    color: var(--bg-paper);
-    border-radius: 1px;
+    padding: 4px 9px;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
   }
-  .role-tag.lead { background: var(--accent); }
-  .role-tag.deputy { background: var(--gold); }
+  .role-tag.lead {
+    background: var(--accent);
+    color: var(--bg-paper);
+    border-color: var(--accent);
+  }
+  .role-tag.deputy {
+    background: var(--bg-paper);
+    color: var(--gold);
+    border-color: var(--gold);
+  }
   .role-tag.maternity {
     background: transparent;
     color: var(--ink-mute);
-    border: 1px solid var(--line);
+    border-color: var(--line-strong);
   }
 
   .person-role {
@@ -980,27 +1289,55 @@
   /* === АДАПТИВНОСТЬ === */
   @media (max-width: 1100px) {
     .org-companies-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 900px) {
-    .wrap { padding: 32px 20px 64px; }
-    header.top { grid-template-columns: 1fr; }
-    .meta { text-align: left; }
     .summary { grid-template-columns: repeat(2, 1fr); }
     .summary > div:nth-child(2) { border-right: none; }
     .summary > div:nth-child(1), .summary > div:nth-child(2) { border-bottom: 1px solid var(--line-soft); }
-    .division-head { grid-template-columns: 1fr; padding: 24px; }
+  }
+  @media (max-width: 900px) {
+    .wrap { padding: 24px 18px 64px; }
+    .topbar { font-size: 9.5px; gap: 12px; padding-bottom: 14px; margin-bottom: 20px; }
+    .topbar-left { gap: 10px; }
+    .topbar-right { display: none; }
+    .chain-tag span { display: none; }
+    .chain-arrow { display: none; }
+    header.top {
+      grid-template-columns: 1fr;
+      padding-bottom: 28px;
+      margin-bottom: 32px;
+      gap: 24px;
+    }
+    .brand { gap: 18px; align-items: flex-start; }
+    .brand-logo-wrap { width: 64px; height: 64px; padding: 6px; }
+    h1 { font-size: clamp(26px, 7vw, 36px); }
+    .subtitle { font-size: 13px; gap: 10px; margin-top: 10px; }
+    .subtitle::before { width: 18px; }
+    .meta { text-align: left; }
+    .meta-card { width: 100%; min-width: 0; text-align: left; }
+    .meta-card .meta-row { justify-content: flex-start; }
+    .summary > div { padding: 18px 18px 16px; }
+    .summary .num { font-size: 36px; }
+    .division-head { grid-template-columns: 1fr; padding: 22px 22px 18px; }
+    .division::before { height: 44px; }
     .division-stats { text-align: left; }
     .person {
       grid-template-columns: 1fr;
-      gap: 8px;
-      padding: 20px 24px;
+      gap: 10px;
+      padding: 20px 22px;
     }
     .person-phone { text-align: left; }
     footer { grid-template-columns: 1fr; }
-    .tab { padding: 12px 16px; font-size: 16px; }
+    .tabs { gap: 0; overflow-x: auto; flex-wrap: nowrap; }
+    .tabs-label { display: none; }
+    .tab { padding: 12px 16px; font-size: 16px; flex-shrink: 0; }
     .tab span.tab-text { display: none; }
     .tab svg { width: 18px; height: 18px; }
     .tab.active span.tab-text { display: inline; }
+    .tab .tab-count { display: none; }
+    .search input { padding: 14px 18px 14px 46px; font-size: 14px; }
+    .search::before { left: 16px; width: 16px; height: 16px; }
+    .search-hint { display: none; }
+    .filter-row { gap: 8px; }
+    .filter-label { width: 100%; margin-bottom: 2px; }
     .org-chart { padding: 32px 8px; }
     .org-companies-grid { grid-template-columns: repeat(2, 1fr); }
     .modal { margin: 0; }
@@ -1010,24 +1347,58 @@
       padding: 16px 24px;
     }
     .section-title { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .section-title h2 { font-size: 24px; }
+  }
+  @media (max-width: 540px) {
+    .summary { grid-template-columns: 1fr; }
+    .summary > div { border-right: none; border-bottom: 1px solid var(--line-soft); }
+    .summary > div:last-child { border-bottom: none; }
   }
 
   @media print {
     body { background: white; }
-    .toolbar, .tabs { display: none; }
+    .toolbar, .tabs, .topbar, .meta-actions { display: none; }
     .tab-panel { display: block !important; }
     .division { box-shadow: none; break-inside: avoid; }
+    .division::before { display: none; }
     .person:hover { background: transparent; }
+    header.top::after { display: none; }
+    .meta-card { box-shadow: none; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
+  <div class="topbar" role="navigation" aria-label="Брендовая полоса">
+    <div class="topbar-left">
+      <span class="topbar-mark">ПА · НТК</span>
+      <span class="topbar-sep" aria-hidden="true"></span>
+      <span class="chain-tag" title="Железнодорожные перевозки">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="13" rx="2"/><path d="M5 11h14"/><circle cx="9" cy="20" r="1.4"/><circle cx="15" cy="20" r="1.4"/><path d="M7 17l-2 3M17 17l2 3"/></svg>
+        <span>ЖД · НТК</span>
+      </span>
+      <span class="chain-arrow" aria-hidden="true">—</span>
+      <span class="chain-tag" title="Морские порты">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6" r="2"/><path d="M12 8v13M8 12h8M5 17a7 7 0 0 0 14 0"/></svg>
+        <span>Порты · ПА</span>
+      </span>
+    </div>
+    <div class="topbar-right">
+      Внутренний документ · версия<b>28.04.2026</b>
+    </div>
+  </div>
+
   <header class="top">
-    <div>
-      <div class="eyebrow">Холдинг Портовый Альянс · НТК</div>
-      <h1>Юридическая <em>служба</em><br>структура и контакты</h1>
+    <div class="brand">
+      <div class="brand-logo-wrap">
+        <img src="logo_ntc-pa.png" alt="Портовый Альянс / НТК" class="brand-logo">
+      </div>
+      <div class="brand-text">
+        <div class="eyebrow">Корпоративный реестр · юридическая служба</div>
+        <h1>Портовый&nbsp;Альянс<span class="slash">/</span><em>НТК</em></h1>
+        <div class="subtitle">Юридическая служба холдинга <span class="sub-mute">· структура и контакты</span></div>
+      </div>
     </div>
     <div class="meta">
       <div class="meta-actions">
@@ -1036,17 +1407,52 @@
           <span>ФОТ</span>
         </button>
       </div>
-      <strong>Внутренний документ</strong>
-      По состоянию на 28.04.2026<br>
-      Источник: справочник ЮД ПА/НТК
+      <div class="meta-card">
+        <span class="meta-label">Внутренний документ</span>
+        <strong>Справочник ЮД ПА/НТК</strong>
+        <div class="meta-row">Актуально на<b>28.04.2026</b></div>
+        <div class="meta-row">Источник<b>ЮД ПА/НТК</b></div>
+      </div>
     </div>
   </header>
 
-  <section class="summary">
-    <div><div class="num">64</div><div class="lbl">Всего сотрудников</div></div>
-    <div><div class="num">5</div><div class="lbl">Подразделений ЮД ПА</div></div>
-    <div><div class="num teal">12</div><div class="lbl">Юрлиц холдинга</div></div>
-    <div><div class="num warn">10</div><div class="lbl">Вакансий</div></div>
+  <section class="summary" aria-label="Сводка по службе">
+    <div>
+      <div class="kpi-head">
+        <span class="kpi-tag">01</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="num">64</div>
+      <div class="lbl">Всего сотрудников</div>
+      <div class="sub-lbl">по холдингу</div>
+    </div>
+    <div>
+      <div class="kpi-head">
+        <span class="kpi-tag">02</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="num">5</div>
+      <div class="lbl">Подразделений ЮД ПА</div>
+      <div class="sub-lbl">центральный офис</div>
+    </div>
+    <div>
+      <div class="kpi-head">
+        <span class="kpi-tag">03</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M3 10l9-7 9 7M5 21V10M19 21V10M9 14h2M13 14h2M9 18h2M13 18h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="num teal">12</div>
+      <div class="lbl">Юрлиц холдинга</div>
+      <div class="sub-lbl">ПА · НТК · дочерние</div>
+    </div>
+    <div>
+      <div class="kpi-head">
+        <span class="kpi-tag">04</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </div>
+      <div class="num warn">10</div>
+      <div class="lbl">Открытых вакансий</div>
+      <div class="sub-lbl">в работе подбор</div>
+    </div>
   </section>
 
   <!-- Модальное окно для ввода кода доступа к ФОТ -->
@@ -1084,13 +1490,16 @@
   </div>
 
   <div class="tabs" role="tablist">
+    <span class="tabs-label" aria-hidden="true">Раздел</span>
     <button class="tab active" data-tab="chart" role="tab">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       <span class="tab-text">Структура</span>
+      <span class="tab-count">17</span>
     </button>
     <button class="tab" data-tab="list" role="tab">
       <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
       <span class="tab-text">Список</span>
+      <span class="tab-count">64</span>
     </button>
   </div>
 
@@ -1321,13 +1730,17 @@
   <div class="toolbar">
     <div class="search">
       <input type="search" id="searchInput" placeholder="Поиск по ФИО, должности, функционалу, компании или телефону…" autocomplete="off">
+      <span class="search-hint" aria-hidden="true">по справочнику</span>
     </div>
-    <div class="filter-chips" id="filterChips">
-      <button class="chip active" data-filter="all">Все</button>
-      <button class="chip" data-filter="hq">Москва · ЮД ПА</button>
-      <button class="chip" data-filter="sub">Юрлица холдинга</button>
-      <button class="chip" data-filter="leads">Руководители</button>
-      <button class="chip" data-filter="vacancy">Вакансии</button>
+    <div class="filter-row">
+      <span class="filter-label">Фильтр</span>
+      <div class="filter-chips" id="filterChips">
+        <button class="chip active" data-filter="all">Все</button>
+        <button class="chip" data-filter="hq">Москва · ЮД ПА</button>
+        <button class="chip" data-filter="sub">Юрлица холдинга</button>
+        <button class="chip" data-filter="leads">Руководители</button>
+        <button class="chip" data-filter="vacancy">Вакансии</button>
+      </div>
     </div>
   </div>
 

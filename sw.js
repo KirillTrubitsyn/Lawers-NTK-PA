@@ -1,10 +1,11 @@
-const CACHE_VERSION = 'lawers-ntk-pa-v6';
+const CACHE_VERSION = 'lawers-ntk-pa-v7';
 const PRECACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
   './icon.svg',
-  './icon-maskable.svg'
+  './icon-maskable.svg',
+  './logo_ntc-pa.png'
 ];
 
 self.addEventListener('install', (event) => {
