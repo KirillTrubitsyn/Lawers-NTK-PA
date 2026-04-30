@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 512 512" preserveAspectRatio="xMidYMid slice">
+  <!-- Бордовая заливка по всему квадрату закрывает прозрачные углы PNG,
+       чтобы iOS не подкладывал белое перед своей системной маской. -->
+  <rect width="512" height="512" fill="#6e1f1f"/>
+  <image xlink:href="logo_ntc-pa.png" href="logo_ntc-pa.png"
+         x="0" y="0" width="512" height="512"
+         preserveAspectRatio="xMidYMid slice"/>
+</svg>
