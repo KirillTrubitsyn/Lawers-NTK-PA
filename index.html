@@ -1320,7 +1320,7 @@
 
   <div class="toolbar">
     <div class="search">
-      <input type="search" id="searchInput" placeholder="Поиск по ФИО, должности, функционалу или телефону…" autocomplete="off">
+      <input type="search" id="searchInput" placeholder="Поиск по ФИО, должности, функционалу, компании или телефону…" autocomplete="off">
     </div>
     <div class="filter-chips" id="filterChips">
       <button class="chip active" data-filter="all">Все</button>
@@ -2905,6 +2905,13 @@
       if (activeFilter === 'hq' && isSub) sectionAllowed = false;
       if (activeFilter === 'sub' && !isSub) sectionAllowed = false;
 
+      const divHead = div.querySelector('.division-head');
+      const divisionText = (
+        (div.dataset.division || '') + ' ' +
+        (divHead ? divHead.textContent : '')
+      ).toLowerCase();
+      const divisionMatchesQuery = !!q && divisionText.includes(q);
+
       const persons = div.querySelectorAll('.person');
       let divHasVisible = false;
 
@@ -2912,7 +2919,7 @@
         const text = p.textContent.toLowerCase();
         const tags = (p.dataset.tags || '').split(' ');
 
-        const matchSearch = !q || text.includes(q);
+        const matchSearch = !q || text.includes(q) || divisionMatchesQuery;
         let matchFilter = sectionAllowed;
         if (activeFilter === 'leads') matchFilter = tags.includes('lead') || tags.includes('deputy');
         else if (activeFilter === 'vacancy') matchFilter = tags.includes('vacancy');
