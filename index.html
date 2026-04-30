@@ -2958,7 +2958,8 @@
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => activateTab(tab.dataset.tab));
   });
-  activateTab('chart');
+  const isMobile = window.matchMedia('(max-width: 900px)').matches;
+  activateTab(isMobile ? 'list' : 'chart');
 
   // === Модальное окно ===
   const modal = document.getElementById('modal');
